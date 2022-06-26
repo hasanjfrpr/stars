@@ -28,20 +28,35 @@ class SettingFragment : BaseFragment() ,  AddSettingDialog.SettingDialogInterFac
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        addDialog = AddSettingDialog()
-        settingModelList = ArrayList<SettingModel>()
+
         return inflater.inflate(R.layout.fragment_setting, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        addDialog = AddSettingDialog()
+        settingModelList = ArrayList<SettingModel>()
+        adapter = SettingRecyclerAdapter(settingModelList,requireContext())
         event()
+
+        adapter.onLongClickAdapterItem(object : SettingRecyclerAdapter.SettingAdapeterInterFace{
+            @SuppressLint("NotifyDataSetChanged")
+            override fun onLongClick(position: Int) {
+                settingModelList.removeAt(position)
+        adapter = SettingRecyclerAdapter(settingModelList,requireContext())
+        RV_setting.adapter=adapter
+        RV_setting.layoutManager=GridLayoutManager(requireContext(),2,RecyclerView.VERTICAL,false)
+        adapter.notifyDataSetChanged()
+            }
+
+        })
     }
 
     private fun event(){
         IV_add_setting.setOnClickListener {
             addDialog.settingInterFace=this
            addDialog.show(childFragmentManager , "")
+            addDialog.isCancelable=false
         }
     }
 
@@ -53,5 +68,15 @@ class SettingFragment : BaseFragment() ,  AddSettingDialog.SettingDialogInterFac
         RV_setting.layoutManager=GridLayoutManager(requireContext(),2,RecyclerView.VERTICAL,false)
         adapter.notifyDataSetChanged()
     }
+
+//    @SuppressLint("NotifyDataSetChanged")
+//    override fun onLongClick(position: Int) {
+//        settingModelList.removeAt(position)
+//        adapter = SettingRecyclerAdapter(settingModelList,requireContext())
+//        RV_setting.adapter=adapter
+//        RV_setting.layoutManager=GridLayoutManager(requireContext(),2,RecyclerView.VERTICAL,false)
+//        adapter.notifyDataSetChanged()
+//    }
+
 
 }
