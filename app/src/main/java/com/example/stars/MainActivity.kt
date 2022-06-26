@@ -1,8 +1,13 @@
 package com.example.stars
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import android.util.Log
+import androidx.appcompat.app.AlertDialog
+import com.example.stars.view.fragment.HomeFragment
+import com.example.stars.view.fragment.SettingFragment
+import com.example.stars.view.fragment.SignUpFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import np.com.susanthapa.curved_bottom_navigation.CbnMenuItem
 
@@ -10,9 +15,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        supportFragmentManager.beginTransaction().replace(R.id.frame_main, HomeFragment()).commit()
         setNavBtn()
 
     }
+
 
     private fun setNavBtn() {
         var menuItems = arrayOf(
@@ -36,7 +43,12 @@ class MainActivity : AppCompatActivity() {
 
         nav_view.setMenuItems(menuItems, 1)
         nav_view.setOnMenuItemClickListener { cbnMenuItem, index ->
-            Toast.makeText(this, index.toString(), Toast.LENGTH_SHORT).show()
+            when(index){
+                0->{supportFragmentManager.beginTransaction().replace(R.id.frame_main , SignUpFragment()).commit()}
+                1->{supportFragmentManager.beginTransaction().replace(R.id.frame_main , HomeFragment()).commit()}
+                2->{supportFragmentManager.beginTransaction().replace(R.id.frame_main , SettingFragment()).commit()}
+
+            }
         }
     }
 }

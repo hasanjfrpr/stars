@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+    <androidx.core.widget.NestedScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:fillViewport="true"
+        android:layout_height="match_parent">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="16dp"
+                    android:text="ثبت نام"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginVertical="8dp"
+                    android:hint="نام">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/TIET_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textDirection="rtl" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginVertical="8dp"
+                    android:hint="نام خانوادگی">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/TIET_family"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textDirection="rtl" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginVertical="8dp"
+                    android:hint="شماره تماس">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/TIET_phone_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="phone"
+                        android:textDirection="rtl" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginHorizontal="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="right"
+                        android:layout_marginStart="16dp"
+                        android:gravity="center"
+                        android:text="تاریخ ثبت نام"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/mbtn_date"
+                        style="?materialButtonOutlinedStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+                        android:layout_marginEnd="16dp"
+                        android:gravity="center"
+                        android:text="1401/1/1"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </FrameLayout>
+
+                <CheckBox
+                    android:id="@+id/checkbox_period"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="16dp"
+                    android:buttonTint="@color/primary"
+                    android:checked="false"
+                    android:layoutDirection="rtl"
+                    android:text="برداشتن دوره"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/root_doreh"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:animateLayoutChanges="true"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <!--                <EditText-->
+                    <!--                    android:id="@+id/et_mokamel"-->
+                    <!--                    android:layout_width="match_parent"-->
+                    <!--                    android:layout_height="wrap_content"-->
+                    <!--                    android:layout_marginHorizontal="16dp"-->
+                    <!--                    android:layout_marginBottom="4dp"-->
+                    <!--                    android:background="@drawable/et_shape"-->
+                    <!--                    android:hint="مکمل های مورد استفاده ..."-->
+                    <!--                    android:minLines="3"-->
+                    <!--                    android:paddingHorizontal="8dp"-->
+                    <!--                    android:paddingVertical="4dp"-->
+                    <!--                    android:textColor="@color/primary" />-->
+
+                    <!--                <EditText-->
+                    <!--                    android:id="@+id/et_darou"-->
+                    <!--                    android:layout_width="match_parent"-->
+                    <!--                    android:layout_height="wrap_content"-->
+                    <!--                    android:layout_marginHorizontal="16dp"-->
+                    <!--                    android:background="@drawable/et_shape"-->
+                    <!--                    android:hint="داروه ای مورد استفاده ..."-->
+                    <!--                    android:minLines="2"-->
+                    <!--                    android:paddingHorizontal="8dp"-->
+                    <!--                    android:paddingVertical="4dp" />-->
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="32dp"
+                android:gravity="center">
+
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/mbtn_remove_filter"
+                    style="?materialButtonOutlinedStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="پاک کردن فیلدها"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/mbtn_save_register"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="ذخیره"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </FrameLayout>
+    </androidx.core.widget.NestedScrollView>
