@@ -5,11 +5,11 @@ import androidx.room.*
 import com.example.stars.models.setting.SettingModel.SettingModel
 
 @Entity
-class User(val name:String? , val lastName:String? , val phoneNumber:String?,
-val signUpDate:String?) {
+class User(var name:String? , var lastName:String? , var phoneNumber:String?,
+var signUpDate:String?) {
 
     @PrimaryKey(autoGenerate = true)
-    val id:Int=0
+    var id:Int=0
 
 
 }
@@ -26,7 +26,14 @@ interface  AppDao{
     fun deleteUser(user:User)
 
     ///settingmodel
+    @Insert
+    fun insertSettingPrice(settingModdl :SettingModel)
 
+    @Delete
+    fun deleteSettingPrice(settingModdl: SettingModel)
+
+    @Query("select * from SettingModel ")
+    fun getAllSettingModel() : List<SettingModel>
 
 
 }

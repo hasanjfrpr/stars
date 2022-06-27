@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stars.R
+import com.example.stars.db.local.AppDataBase
 import com.example.stars.models.setting.SettingModel.SettingModel
 import kotlinx.android.synthetic.main.item_setting.view.*
 
@@ -28,6 +29,7 @@ class SettingRecyclerAdapter(val settingList : MutableList<SettingModel>,val con
         holder.itemView.setOnLongClickListener {
            settingList.removeAt(position)
             notifyItemRemoved(position)
+            AppDataBase.getInstance(context).getDao().deleteSettingPrice(settingList[position])
             return@setOnLongClickListener true
         }
     }

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.stars.R
 import com.example.stars.adapter.SettingRecyclerAdapter
 import com.example.stars.base.BaseFragment
+import com.example.stars.db.local.AppDataBase
 import com.example.stars.dialog.AddSettingDialog
 import com.example.stars.models.setting.SettingModel.SettingModel
 import kotlinx.android.synthetic.main.fragment_setting.*
@@ -36,6 +37,7 @@ class SettingFragment : BaseFragment() ,  AddSettingDialog.SettingDialogInterFac
         super.onViewCreated(view, savedInstanceState)
         addDialog = AddSettingDialog()
         settingModelList = ArrayList<SettingModel>()
+        settingModelList.addAll(AppDataBase.getInstance(requireContext()).getDao().getAllSettingModel())
         adapter = SettingRecyclerAdapter(settingModelList,requireContext())
         RV_setting.adapter=adapter
         RV_setting.layoutManager=GridLayoutManager(requireContext(),2,RecyclerView.VERTICAL,false)
@@ -59,6 +61,7 @@ class SettingFragment : BaseFragment() ,  AddSettingDialog.SettingDialogInterFac
         RV_setting.adapter=adapter
         RV_setting.layoutManager=GridLayoutManager(requireContext(),2,RecyclerView.VERTICAL,false)
         adapter.notifyDataSetChanged()
+        AppDataBase.getInstance(requireContext()).getDao().insertSettingPrice(SettingModel(title,price))
 
     }
 
