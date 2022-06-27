@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.item_setting.view.*
 class SettingRecyclerAdapter(val settingList : MutableList<SettingModel>,val context:Context) : RecyclerView.Adapter<SettingRecyclerAdapter.SettingAdapterViewHolder>() {
 
 
-     var  settingAdapterInterface : SettingAdapeterInterFace? = null
+
 
     class SettingAdapterViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView)
 
@@ -26,18 +26,13 @@ class SettingRecyclerAdapter(val settingList : MutableList<SettingModel>,val con
         holder.itemView.TV_item_setting_price.text = settingList[position].price
 
         holder.itemView.setOnLongClickListener {
-            settingAdapterInterface?.onLongClick(position)
+           settingList.removeAt(position)
+            notifyItemRemoved(position)
             return@setOnLongClickListener true
         }
     }
 
     override fun getItemCount(): Int = settingList.size
 
-    public fun onLongClickAdapterItem(settingAdapter : SettingAdapeterInterFace){
-        this.settingAdapterInterface = settingAdapter
-    }
 
-    interface SettingAdapeterInterFace{
-       fun onLongClick(position:Int)
-    }
 }

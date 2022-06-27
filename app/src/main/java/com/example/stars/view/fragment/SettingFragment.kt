@@ -17,7 +17,7 @@ import com.example.stars.models.setting.SettingModel.SettingModel
 import kotlinx.android.synthetic.main.fragment_setting.*
 
 //
-class SettingFragment : BaseFragment() ,  AddSettingDialog.SettingDialogInterFace{
+class SettingFragment : BaseFragment() ,  AddSettingDialog.SettingDialogInterFace {
 
      lateinit  var settingModelList:MutableList<SettingModel>
      lateinit var addDialog : AddSettingDialog
@@ -37,19 +37,11 @@ class SettingFragment : BaseFragment() ,  AddSettingDialog.SettingDialogInterFac
         addDialog = AddSettingDialog()
         settingModelList = ArrayList<SettingModel>()
         adapter = SettingRecyclerAdapter(settingModelList,requireContext())
-        event()
-
-        adapter.onLongClickAdapterItem(object : SettingRecyclerAdapter.SettingAdapeterInterFace{
-            @SuppressLint("NotifyDataSetChanged")
-            override fun onLongClick(position: Int) {
-                settingModelList.removeAt(position)
-        adapter = SettingRecyclerAdapter(settingModelList,requireContext())
         RV_setting.adapter=adapter
         RV_setting.layoutManager=GridLayoutManager(requireContext(),2,RecyclerView.VERTICAL,false)
-        adapter.notifyDataSetChanged()
-            }
+        event()
 
-        })
+
     }
 
     private fun event(){
@@ -67,16 +59,9 @@ class SettingFragment : BaseFragment() ,  AddSettingDialog.SettingDialogInterFac
         RV_setting.adapter=adapter
         RV_setting.layoutManager=GridLayoutManager(requireContext(),2,RecyclerView.VERTICAL,false)
         adapter.notifyDataSetChanged()
+
     }
 
-//    @SuppressLint("NotifyDataSetChanged")
-//    override fun onLongClick(position: Int) {
-//        settingModelList.removeAt(position)
-//        adapter = SettingRecyclerAdapter(settingModelList,requireContext())
-//        RV_setting.adapter=adapter
-//        RV_setting.layoutManager=GridLayoutManager(requireContext(),2,RecyclerView.VERTICAL,false)
-//        adapter.notifyDataSetChanged()
-//    }
 
 
 }
