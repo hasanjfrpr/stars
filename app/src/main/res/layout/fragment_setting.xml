@@ -6,19 +6,53 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.fragment.SettingFragment"
     android:orientation="vertical">
-    <FrameLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:gravity="right"
         android:background="@color/primary"
-        android:paddingHorizontal="16dp"
-        android:layout_height="56dp">
+        android:paddingHorizontal="16dp">
+        <TextView
+            android:id="@+id/TV_periodPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            tools:text="416343246"
+            android:textColor="@color/on_primary"
+            android:layout_marginRight="24sp"
+            android:textStyle="bold"
+            android:paddingHorizontal="16dp"
+            android:gravity="center"/>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/Mbtn_periodPrice_save"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="ثبت شهریه"
+            android:backgroundTint="@color/on_primary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/primary"
+            android:layout_marginRight="26dp"
+            android:gravity="center"/>
+
+
         <ImageView
             android:id="@+id/IV_add_setting"
-            android:src="@drawable/ic_add"
-            android:layout_gravity="right"
             android:layout_width="40dp"
-            app:tint="@color/white"
-            android:layout_height="match_parent"/>
-    </FrameLayout>
+            android:visibility="gone"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:background="?selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:src="@drawable/ic_add"
+            app:tint="@color/white" />
+
+
+
+
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

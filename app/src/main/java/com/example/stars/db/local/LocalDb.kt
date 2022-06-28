@@ -6,7 +6,7 @@ import com.example.stars.models.setting.SettingModel.SettingModel
 
 @Entity
 class User(var name:String? , var lastName:String? , var phoneNumber:String?,
-var signUpDate:String?) {
+var signUpDate:String? , var periodPrice:String?) {
 
     @PrimaryKey(autoGenerate = true)
     var id:Int=0
@@ -25,15 +25,25 @@ interface  AppDao{
     @Delete
     fun deleteUser(user:User)
 
+
+
     ///settingmodel
     @Insert
     fun insertSettingPrice(settingModdl :SettingModel)
 
-    @Delete
-    fun deleteSettingPrice(settingModdl: SettingModel)
+    @Query("delete from SettingModel where title = :title")
+    fun deleteSettingPrice(title:String)
 
     @Query("select * from SettingModel ")
     fun getAllSettingModel() : List<SettingModel>
+
+    @Query("select price from SettingModel where title ='شهریه'")
+            fun getPeroidPrice():String
+
+
+
+
+
 
 
 }
