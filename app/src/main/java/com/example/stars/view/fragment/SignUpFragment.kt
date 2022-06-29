@@ -13,6 +13,8 @@ import com.example.stars.base.BaseFragment
 import com.example.stars.base.formatNumber
 import com.example.stars.db.local.AppDataBase
 import com.example.stars.db.local.User
+import com.example.stars.dialog.BuyDialog
+import com.example.stars.models.setting.SettingModel.SettingModel
 import ir.hamsaa.persiandatepicker.Listener
 import ir.hamsaa.persiandatepicker.PersianDatePickerDialog
 import ir.hamsaa.persiandatepicker.util.PersianCalendar
@@ -74,6 +76,19 @@ class SignUpFragment : BaseFragment() {
                }
            }
        })
+
+        mbtn_signUp_selectBuy.setOnClickListener {
+        var list:MutableList<com.example.stars.models.setting.SettingModel.SettingModel> =
+            AppDataBase.getInstance(requireContext()).getDao().getAllSettingModel() as MutableList<SettingModel>
+
+            list.remove(SettingModel("شهریه" , AppDataBase.getInstance(requireContext()).getDao().getPeroidPrice()))
+
+            var ss = BuyDialog(list)
+            ss.show(requireActivity().supportFragmentManager , "")
+            ss.isCancelable = false
+
+
+        }
 
 
         mbtn_save_register.setOnClickListener {

@@ -101,6 +101,10 @@
                         android:textSize="16sp"
                         android:textStyle="bold" />
                 </FrameLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:background="@color/grey"
+                    android:layout_height="1dp"/>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -141,7 +145,41 @@
                         android:text="پرداخت کامل شهریه"
                         android:checked="true"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView" />
+                        app:layout_constraintTop_toBottomOf="@+id/textView"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:background="@color/grey"
+                    android:layout_height="1dp"/>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:paddingHorizontal="16dp"
+                    android:layout_height="56dp">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/mbtn_signUp_selectBuy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="?materialButtonOutlinedStyle"
+                        android:text="خریدها"
+                        android:textSize="18sp"
+                        android:textColor="@color/primary"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/TV_signUp_totalBuy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/primary"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <LinearLayout
@@ -152,29 +190,6 @@
                     android:orientation="vertical"
                     android:visibility="visible">
 
-                    <!--                <EditText-->
-                    <!--                    android:id="@+id/et_mokamel"-->
-                    <!--                    android:layout_width="match_parent"-->
-                    <!--                    android:layout_height="wrap_content"-->
-                    <!--                    android:layout_marginHorizontal="16dp"-->
-                    <!--                    android:layout_marginBottom="4dp"-->
-                    <!--                    android:background="@drawable/et_shape"-->
-                    <!--                    android:hint="مکمل های مورد استفاده ..."-->
-                    <!--                    android:minLines="3"-->
-                    <!--                    android:paddingHorizontal="8dp"-->
-                    <!--                    android:paddingVertical="4dp"-->
-                    <!--                    android:textColor="@color/primary" />-->
-
-                    <!--                <EditText-->
-                    <!--                    android:id="@+id/et_darou"-->
-                    <!--                    android:layout_width="match_parent"-->
-                    <!--                    android:layout_height="wrap_content"-->
-                    <!--                    android:layout_marginHorizontal="16dp"-->
-                    <!--                    android:background="@drawable/et_shape"-->
-                    <!--                    android:hint="داروه ای مورد استفاده ..."-->
-                    <!--                    android:minLines="2"-->
-                    <!--                    android:paddingHorizontal="8dp"-->
-                    <!--                    android:paddingVertical="4dp" />-->
 
                 </LinearLayout>
 
