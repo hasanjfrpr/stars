@@ -54,4 +54,26 @@ dependencies {
 
     //bottom navigation
     implementation 'np.com.susanthapa:curved_bottom_navigation:0.6.5'
+
+
+
+
+
+
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1")
+    // ViewModel utilities for Compose
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1")
+    // LiveData
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.1")
+    // Lifecycles only (without ViewModel or LiveData)
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.1")
+    // Annotation processor
+    kapt("androidx.lifecycle:lifecycle-compiler:2.4.1")
+    // alternately - if using Java8, use the following instead of lifecycle-compiler
+    implementation("androidx.lifecycle:lifecycle-common-java8:2.4.1")
+
+
+
+
 }

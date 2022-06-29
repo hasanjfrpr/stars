@@ -34,7 +34,7 @@ class SavePeriodPriceDialog : DialogFragment(){
             if(price.text.isNullOrEmpty()) price.error="قیمت وارد شود"
             else{
             oc.onClick(price.text.toString().trim())
-
+                dismiss()
             }
         }
 

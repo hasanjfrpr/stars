@@ -1,63 +1,72 @@
 package com.example.stars.db.local
 
 import android.content.Context
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import com.example.stars.models.setting.SettingModel.SettingModel
 
 @Entity
-class User(var name:String? , var lastName:String? , var phoneNumber:String?,
-var signUpDate:String? , var periodPrice:String?) {
+class User(
+    var name: String?, var lastName: String?, var phoneNumber: String?,
+    var signUpDate: String?, var periodPrice: String?
+) {
 
     @PrimaryKey(autoGenerate = true)
-    var id:Int=0
+    var id: Int = 0
 
 
 }
 
 
-
 @Dao
-interface  AppDao{
+interface AppDao {
 
     @Insert
-    fun insertUser(user:User)
+    fun insertUser(user: User)
 
     @Delete
-    fun deleteUser(user:User)
-
+    fun deleteUser(user: User)
 
 
     ///settingmodel
     @Insert
-    fun insertSettingPrice(settingModdl :SettingModel)
+    fun insertSettingPrice(settingModdl: SettingModel)
 
     @Query("delete from SettingModel where title = :title")
-    fun deleteSettingPrice(title:String)
+    fun deleteSettingPrice(title: String)
 
     @Query("select * from SettingModel ")
-    fun getAllSettingModel() : List<SettingModel>
+    fun getAllSettingModel(): List<SettingModel>
 
     @Query("select price from SettingModel where title ='شهریه'")
-            fun getPeroidPrice():String
+    fun getPeroidPrice(): String
 
+    @Query("select title from SettingModel where title=:title")
+    fun getTitleSettingModel(title:String): String
 
-
-
+    @Query("UPDATE SettingModel SET title=:title,price=:price  WHERE title = :title")
+    fun updateItemSettingModel(title:String , price:String )
 
 
 
 }
-@Database(entities = [User::class , SettingModel::class] ,version = 1 , exportSchema = false)
-abstract class AppDataBase : RoomDatabase(){
 
-    abstract fun getDao() : AppDao
+@Database(entities = [User::class, SettingModel::class], version = 1, exportSchema = false)
+abstract class AppDataBase : RoomDatabase() {
 
-    companion object{
-        var appDb : AppDataBase? = null
+    abstract fun getDao(): AppDao
 
-        public fun getInstance(context : Context) : AppDataBase{
-            if (appDb==null){
-                appDb= Room.databaseBuilder(context.applicationContext , AppDataBase::class.java , "StarsDb" )
+    companion object {
+        var appDb: AppDataBase? = null
+
+        public fun getInstance(context: Context): AppDataBase {
+            if (appDb == null) {
+                appDb = Room.databaseBuilder(
+                    context.applicationContext,
+                    AppDataBase::class.java,
+                    "StarsDb"
+                )
                     .allowMainThreadQueries()
                     .build()
             }

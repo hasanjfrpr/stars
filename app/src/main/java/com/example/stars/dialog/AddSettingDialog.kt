@@ -44,6 +44,7 @@ lateinit var cancel:TextView
                     title.text.toString().trim(),
                     price.text.toString().trim()
                 )
+                dismiss()
 
             }
         }

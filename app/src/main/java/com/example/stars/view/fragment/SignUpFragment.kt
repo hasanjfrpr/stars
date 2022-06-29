@@ -77,14 +77,26 @@ class SignUpFragment : BaseFragment() {
 
 
         mbtn_save_register.setOnClickListener {
-            if(!isChecked)
+            if(!isChecked){
                 price = ET_periodPrice.text.toString().trim()
-            if (TIET_family.text.isNullOrEmpty()) TIET_family.error = "نام وارد شود"
-            if (TIET_family.text.isNullOrEmpty()) TIET_family.error = "نام خانوادگی وارد شود"
-            AppDataBase.getInstance(requireContext()).getDao().insertUser(User(TIET_name.text.toString().trim(),
-            TIET_family.text.toString().trim() , TIET_phone_number.text.toString().trim() , mbtn_date.text.toString().trim(),
-                price
+                if (TIET_family.text.isNullOrEmpty()) TIET_family.error = "نام وارد شود"
+                if (TIET_family.text.isNullOrEmpty()) TIET_family.error = "نام خانوادگی وارد شود"
+                AppDataBase.getInstance(requireContext()).getDao().insertUser(User(TIET_name.text.toString().trim(),
+                    TIET_family.text.toString().trim() , TIET_phone_number.text.toString().trim() , mbtn_date.text.toString().trim(),
+                    price
                 ))
+            }else{
+                price = AppDataBase.getInstance(requireContext()).getDao().getPeroidPrice()
+                if (TIET_family.text.isNullOrEmpty()) TIET_family.error = "نام وارد شود"
+                if (TIET_family.text.isNullOrEmpty()) TIET_family.error = "نام خانوادگی وارد شود"
+                AppDataBase.getInstance(requireContext()).getDao().insertUser(User(TIET_name.text.toString().trim(),
+                    TIET_family.text.toString().trim() , TIET_phone_number.text.toString().trim() , mbtn_date.text.toString().trim(),
+                    price
+                ))
+            }
+
+
+
 
         }
     }
