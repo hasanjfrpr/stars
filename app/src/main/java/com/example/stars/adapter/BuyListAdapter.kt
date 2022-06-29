@@ -1,5 +1,6 @@
 package com.example.stars.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +20,7 @@ class BuyListAdapter(var list:MutableList<SettingModel>) : RecyclerView.Adapter<
 
     override fun onBindViewHolder(holder: BuyListViewHolder, position: Int) {
         holder.itemView.checkbox_item_buy.text=list[position].title
+
     }
 
     override fun getItemCount(): Int  = list.size
