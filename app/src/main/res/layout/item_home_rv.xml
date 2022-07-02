@@ -24,7 +24,6 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
         android:layout_marginTop="12dp"
         android:padding="4dp"
         android:textColor="@color/black"
@@ -49,14 +48,15 @@
         app:layout_constraintTop_toTopOf="@+id/textView4"
         tools:text="5516500" />
 
-    <com.google.android.material.card.MaterialCardView
+    <androidx.cardview.widget.CardView
+        android:id="@+id/materialCard_item"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:elevation="4dp"
         android:layout_marginLeft="18dp"
         app:cardCornerRadius="30dp"
         android:layout_marginVertical="12dp"
-        android:backgroundTint="@color/primary"
+        app:cardBackgroundColor="@color/primary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
@@ -64,12 +64,12 @@
             android:id="@+id/item_home_date_counter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="25"
+            android:text="25"
             android:textColor="@color/on_primary"
             android:textSize="30sp"
             android:layout_gravity="center"
             android:textStyle="bold"/>
-    </com.google.android.material.card.MaterialCardView>
+    </androidx.cardview.widget.CardView>
 
     <View
         android:layout_width="0dp"

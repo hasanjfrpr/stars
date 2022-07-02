@@ -29,7 +29,7 @@ interface AppDao {
     @Delete
     fun deleteUser(user: User)
 
-    @Query("select * from User")
+    @Query("select * from User order by id desc")
     fun getAllUser() : LiveData<List<User>>
 
     ///settingmodel

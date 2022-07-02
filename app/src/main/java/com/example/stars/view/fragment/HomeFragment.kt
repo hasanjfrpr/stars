@@ -36,7 +36,7 @@ class HomeFragment : BaseFragment() {
     }
     private fun setupRecycler(){
          AppDataBase.getInstance(requireContext()).getDao().getAllUser().observe(this.viewLifecycleOwner){
-             var adapter = HomeAdapter(it as MutableList<User>)
+             var adapter = HomeAdapter(it as MutableList<User> , requireContext())
              RV_home.adapter = adapter
              RV_home.layoutManager = LinearLayoutManager(requireContext() , RecyclerView.VERTICAL , false)
          }
