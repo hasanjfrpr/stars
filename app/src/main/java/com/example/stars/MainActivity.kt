@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatDelegate
 import com.example.stars.view.fragment.HomeFragment
 import com.example.stars.view.fragment.SettingFragment
 import com.example.stars.view.fragment.SignUpFragment
@@ -14,6 +15,7 @@ import np.com.susanthapa.curved_bottom_navigation.CbnMenuItem
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(R.layout.activity_main)
         supportFragmentManager.beginTransaction().replace(R.id.frame_main, HomeFragment()).commit()
         setNavBtn()

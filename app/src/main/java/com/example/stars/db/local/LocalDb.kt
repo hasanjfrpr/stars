@@ -9,7 +9,8 @@ import com.example.stars.models.setting.SettingModel.SettingModel
 @Entity
 class User(
     var name: String?, var lastName: String?, var phoneNumber: String?,
-    var signUpDate: String?, var periodPrice: String?
+    var signUpDate: String?, var periodPrice: String? , var buy:String?,
+    var bedbes:String?
 ) {
 
     @PrimaryKey(autoGenerate = true)
@@ -28,6 +29,8 @@ interface AppDao {
     @Delete
     fun deleteUser(user: User)
 
+    @Query("select * from User")
+    fun getAllUser() : LiveData<List<User>>
 
     ///settingmodel
     @Insert
@@ -52,7 +55,7 @@ interface AppDao {
 
 }
 
-@Database(entities = [User::class, SettingModel::class], version = 1, exportSchema = false)
+@Database(entities = [User::class, SettingModel::class], version = 4, exportSchema = false)
 abstract class AppDataBase : RoomDatabase() {
 
     abstract fun getDao(): AppDao
@@ -67,6 +70,7 @@ abstract class AppDataBase : RoomDatabase() {
                     AppDataBase::class.java,
                     "StarsDb"
                 )
+                    .fallbackToDestructiveMigration()
                     .allowMainThreadQueries()
                     .build()
             }

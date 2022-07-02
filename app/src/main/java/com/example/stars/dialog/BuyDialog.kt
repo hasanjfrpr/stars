@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.TextureView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,26 +22,42 @@ class BuyDialog(var list: MutableList<SettingModel>) : DialogFragment() {
 lateinit var rv:RecyclerView
 lateinit var cancel : TextView
 lateinit var ok : TextView
+lateinit var adapter:BuyListAdapter
+lateinit var onon:onOkClicke
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
         var builder = AlertDialog.Builder(requireContext())
         var view = LayoutInflater.from(requireContext()).inflate(R.layout.buy_list_layout,null)
-        builder.setView(view)
+
         cancel = view.findViewById(R.id.Tv_Buydialog_cancel)
         cancel.setOnClickListener { dismiss() }
         ok = view.findViewById(R.id.Tv_Buydialog_ok)
-        ok.setOnClickListener {
 
-        }
         rv = view.findViewById(R.id.RV_buyList)
-        rv.adapter = BuyListAdapter(list)
+
+        for(i in 0 until list.size) {
+            if (list[i].title == "شهریه"){
+                list.removeAt(i)
+                break
+            }
+        }
+
+        adapter = BuyListAdapter(list)
+        rv.adapter = adapter
         rv.layoutManager= LinearLayoutManager(requireContext(),RecyclerView.VERTICAL ,false)
-
-
+        builder.setView(view)
+        ok.setOnClickListener {
+            onon.onClick(adapter.getListBuy())
+            dismiss()
+        }
 
 
 
         return builder.create()
+    }
+
+    interface  onOkClicke{
+        fun onClick(list:MutableList<SettingModel>)
     }
 }

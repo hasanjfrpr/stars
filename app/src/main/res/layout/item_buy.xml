@@ -3,14 +3,13 @@
     android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:gravity="right"
-    android:paddingVertical="16dp"
     android:layout_height="wrap_content">
     <CheckBox
         android:id="@+id/checkbox_item_buy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:padding="16dp"
+        android:padding="8dp"
         android:layoutDirection="rtl"
         android:textColor="@color/black"
         android:buttonTint="@color/primary"
