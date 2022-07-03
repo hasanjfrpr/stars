@@ -12,6 +12,7 @@ import com.example.stars.R
 import com.example.stars.base.formatNumber
 import com.example.stars.db.local.User
 import kotlinx.android.synthetic.main.item_home_rv.view.*
+import saman.zamani.persiandate.PersianDate
 import java.util.*
 import java.util.logging.Handler
 import kotlin.math.log
@@ -29,8 +30,9 @@ class HomeAdapter(var list:MutableList<User> , var context:Context) : RecyclerVi
        holder.itemView.item_home_name.text = list[position].name+" "+list[position].lastName
         holder.itemView.item_home_bed_bes.text  = formatNumber(list[position].bedbes!!.toDouble())
         calculateReminderTime(list[position].signUpDate.toString())
-        holder.itemView.item_home_date_counter.text = calculateReminderTime(list[position].signUpDate.toString())
+
         var cals = calculateReminderTime(list[position].signUpDate.toString()).toInt()
+        holder.itemView.item_home_date_counter.text = cals.toString()
         if (cals>20 && cals <= 31) holder.itemView.materialCard_item.setCardBackgroundColor(ContextCompat.getColor(context,R.color.green))
         if (cals>10 && cals <= 20) holder.itemView.materialCard_item.setCardBackgroundColor(ContextCompat.getColor(context,R.color.primary))
         if (cals>3 && cals <= 10) holder.itemView.materialCard_item.setCardBackgroundColor(ContextCompat.getColor(context,R.color.orange))
@@ -43,6 +45,12 @@ class HomeAdapter(var list:MutableList<User> , var context:Context) : RecyclerVi
 
 
    private fun calculateReminderTime(date:String) :String{
+
+       var pdate : PersianDate = PersianDate( )
+       Log.i(" persianDate", "calculateReminderTime: " + pdate.shDay+" " + pdate.shMonth + "  "+ pdate.shYear)
+       var sumTodayMiliSecond = 0
+       var sumSignUpDateMiliSecond = 0
+
         var reminderDate:String = "";
        var arr = date.split("/");
        var year = arr[0]
@@ -50,29 +58,43 @@ class HomeAdapter(var list:MutableList<User> , var context:Context) : RecyclerVi
        var day = arr[2]
        when(month.toInt()){
 
-           7->{reminderDate = "30"}
-           8->{reminderDate = "30"}
-           9->{reminderDate = "30"}
-           10->{reminderDate = "30"}
-           11->{reminderDate = "30"}
-           12->{reminderDate = "29"}
-           else->{reminderDate = "31"}
-
-       }
-       var timer = Timer()
-       var handler = android.os.Handler()
-       timer.schedule(object : TimerTask(){
-           override fun run() {
-               handler.post(object  : Runnable{
-                   override fun run() {
-                      reminderDate =((reminderDate.toInt())-1).toString()
-                   }
-
-               })
+           7->{reminderDate = "30"
+               sumSignUpDateMiliSecond = (year.toInt()*12*30*24*60*60*1000)+(month.toInt()*30*24*60*60*1000)+(day.toInt()*24*60*60*1000)
+           }
+           8->{reminderDate = "30"
+               sumSignUpDateMiliSecond = (year.toInt()*12*30*24*60*60*1000)+(month.toInt()*30*24*60*60*1000)+(day.toInt()*24*60*60*1000)
+           }
+           9->{reminderDate = "30"
+               sumSignUpDateMiliSecond = (year.toInt()*12*30*24*60*60*1000)+(month.toInt()*30*24*60*60*1000)+(day.toInt()*24*60*60*1000)
+           }
+           10->{reminderDate = "30"
+               sumSignUpDateMiliSecond = (year.toInt()*12*30*24*60*60*1000)+(month.toInt()*30*24*60*60*1000)+(day.toInt()*24*60*60*1000)
+           }
+           11->{reminderDate = "30"
+               sumSignUpDateMiliSecond = (year.toInt()*12*30*24*60*60*1000)+(month.toInt()*30*24*60*60*1000)+(day.toInt()*24*60*60*1000)
+           }
+           12->{reminderDate = "29"
+               sumSignUpDateMiliSecond = (year.toInt()*12*29*24*60*60*1000)+(month.toInt()*29*24*60*60*1000)+(day.toInt()*24*60*60*1000)
+           }
+           else->{reminderDate = "31"
+               sumSignUpDateMiliSecond = (year.toInt()*12*31*24*60*60*1000)+(month.toInt()*31*24*60*60*1000)+(day.toInt()*24*60*60*1000)
            }
 
-       } ,0 , 2000 )
+       }
+       when(pdate.shMonth.toInt()){
 
-       return  reminderDate
+           7->{sumTodayMiliSecond = (pdate.shYear*12*30*24*60*60*1000)+(pdate.shMonth*30*24*60*60*1000)+(pdate.shDay*24*60*60*1000)}
+           8->{sumTodayMiliSecond = (pdate.shYear*12*30*24*60*60*1000)+(pdate.shMonth*30*24*60*60*1000)+(pdate.shDay*24*60*60*1000)}
+           9->{sumTodayMiliSecond = (pdate.shYear*12*30*24*60*60*1000)+(pdate.shMonth*30*24*60*60*1000)+(pdate.shDay*24*60*60*1000)}
+           10->{sumTodayMiliSecond = (pdate.shYear*12*30*24*60*60*1000)+(pdate.shMonth*30*24*60*60*1000)+(pdate.shDay*24*60*60*1000)}
+           11->{sumTodayMiliSecond = (pdate.shYear*12*30*24*60*60*1000)+(pdate.shMonth*30*24*60*60*1000)+(pdate.shDay*24*60*60*1000)}
+           12->{sumTodayMiliSecond = (pdate.shYear*12*29*24*60*60*1000)+(pdate.shMonth*29*24*60*60*1000)+(pdate.shDay*24*60*60*1000)}
+           else->{sumTodayMiliSecond = (pdate.shYear*12*31*24*60*60*1000)+(pdate.shMonth*31*24*60*60*1000)+(pdate.shDay*24*60*60*1000)}
+
+       }
+
+       var result = ((((sumTodayMiliSecond - sumSignUpDateMiliSecond)/1000)/60)/60)/24
+
+       return  (reminderDate.toInt()-result).toString()
     }
 }

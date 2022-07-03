@@ -55,6 +55,8 @@ dependencies {
     //bottom navigation
     implementation 'np.com.susanthapa:curved_bottom_navigation:0.6.5'
 
+    implementation 'com.github.samanzamani:PersianDate:1.5.1'
+
 
 
 
