@@ -1,17 +1,20 @@
 package com.example.stars.db.local
 
 import android.content.Context
+import android.os.Parcelable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import com.example.stars.models.setting.SettingModel.SettingModel
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 @Entity
 class User(
     var name: String?, var lastName: String?, var phoneNumber: String?,
     var signUpDate: String?, var periodPrice: String? , var buy:String?,
     var bedbes:String?
-) {
+) : Parcelable {
 
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0

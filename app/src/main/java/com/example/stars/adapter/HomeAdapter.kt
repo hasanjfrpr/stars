@@ -1,7 +1,9 @@
 package com.example.stars.adapter
 
 import android.annotation.SuppressLint
+import android.app.Person
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.stars.R
 import com.example.stars.base.formatNumber
 import com.example.stars.db.local.User
+import com.example.stars.view.activity.PersonInfoActivity
 import kotlinx.android.synthetic.main.item_home_rv.view.*
 import saman.zamani.persiandate.PersianDate
 import java.util.*
@@ -38,6 +41,13 @@ class HomeAdapter(var list:MutableList<User> , var context:Context) : RecyclerVi
         if (cals>3 && cals <= 10) holder.itemView.materialCard_item.setCardBackgroundColor(ContextCompat.getColor(context,R.color.orange))
         if (cals>0 && cals <= 3) holder.itemView.materialCard_item.setCardBackgroundColor(ContextCompat.getColor(context,R.color.red))
         if ( cals <= 0) holder.itemView.materialCard_item.setCardBackgroundColor(ContextCompat.getColor(context,R.color.black))
+
+
+        holder.itemView.setOnClickListener {
+            var intent  = Intent(context , PersonInfoActivity::class.java)
+            intent.putExtra("userInfo" ,list[position])
+            context.startActivity(intent)
+        }
 
     }
 
