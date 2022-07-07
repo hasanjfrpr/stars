@@ -195,6 +195,14 @@
 
 
                 </LinearLayout>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/ET_note_signUp"
+                    android:text="یادداشت"
+                    style="?materialButtonOutlinedStyle"
+                    android:layout_width="match_parent"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginVertical="4dp"
+                    android:layout_height="56dp" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"

@@ -13,7 +13,8 @@ import kotlinx.android.parcel.Parcelize
 class User(
     var name: String?, var lastName: String?, var phoneNumber: String?,
     var signUpDate: String?, var periodPrice: String? , var buy:String?,
-    var bedbes:String?
+    var bedbes:String?,
+    var note : String?
 ) : Parcelable {
 
     @PrimaryKey(autoGenerate = true)
@@ -58,7 +59,7 @@ interface AppDao {
 
 }
 
-@Database(entities = [User::class, SettingModel::class], version = 4, exportSchema = false)
+@Database(entities = [User::class, SettingModel::class], version = 5, exportSchema = false)
 abstract class AppDataBase : RoomDatabase() {
 
     abstract fun getDao(): AppDao

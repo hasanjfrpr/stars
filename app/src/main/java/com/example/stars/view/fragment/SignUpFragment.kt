@@ -1,6 +1,7 @@
 package com.example.stars.view.fragment
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
@@ -11,6 +12,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
+import android.widget.EditText
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.example.stars.R
 import com.example.stars.base.BaseFragment
@@ -23,15 +26,19 @@ import ir.hamsaa.persiandatepicker.Listener
 import ir.hamsaa.persiandatepicker.PersianDatePickerDialog
 import ir.hamsaa.persiandatepicker.util.PersianCalendar
 import kotlinx.android.synthetic.main.fragment_sign_up.*
+import org.w3c.dom.Text
 import java.lang.Exception
 import kotlin.math.roundToInt
 
-class SignUpFragment : BaseFragment(), BuyDialog.onOkClicke {
+class SignUpFragment() : BaseFragment(), BuyDialog.onOkClicke {
+
+
 
     var isChecked: Boolean = true;
     var price: String? = "0"
     var totalBedBes: String? = "0"
     var totalBuy: String? = "0"
+    var note: String? = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -71,6 +78,25 @@ class SignUpFragment : BaseFragment(), BuyDialog.onOkClicke {
     }
 
     private fun signup() {
+        ET_note_signUp.setOnClickListener {
+            var dialog = AlertDialog.Builder(requireContext()).create()
+            var view = layoutInflater.inflate(R.layout.dialog_note , null)
+            var ok = view.findViewById<TextView>(R.id.TV_setting_dialog_ok_note)
+            var cancel = view.findViewById<TextView>(R.id.Tv_setting_dialog_cancel_note)
+            var editText = view.findViewById<EditText>(R.id.ET_note)
+
+            cancel.setOnClickListener { dialog.dismiss() }
+            ok.setOnClickListener {
+                note = editText.text.toString().trim()
+                dialog.dismiss()
+                ET_note_signUp.setBackgroundColor(ContextCompat.getColor(requireContext() , R.color.green))
+                ET_note_signUp.text="یادداشت ثبت شد"
+
+            }
+            dialog.setView(view)
+            dialog.show()
+
+        }
 
         price = AppDataBase.getInstance(requireContext()).getDao().getPeroidPrice()
 
@@ -123,7 +149,8 @@ class SignUpFragment : BaseFragment(), BuyDialog.onOkClicke {
                             mbtn_date.text.toString().trim(),
                             price,
                             totalBuy,
-                            totalBedBes.toString().trim()
+                            totalBedBes.toString().trim(),
+                            note
                         )
                     )
                 }
@@ -142,7 +169,8 @@ class SignUpFragment : BaseFragment(), BuyDialog.onOkClicke {
                             mbtn_date.text.toString().trim(),
                             price,
                             totalBuy,
-                            totalBedBes.toString().trim()
+                            totalBedBes.toString().trim(),
+                            note
                         )
                     )
                 }

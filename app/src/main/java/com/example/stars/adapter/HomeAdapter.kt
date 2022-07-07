@@ -57,7 +57,6 @@ class HomeAdapter(var list:MutableList<User> , var context:Context) : RecyclerVi
    private fun calculateReminderTime(date:String) :String{
 
        var pdate : PersianDate = PersianDate( )
-       Log.i(" persianDate", "calculateReminderTime: " + pdate.shDay+" " + pdate.shMonth + "  "+ pdate.shYear)
        var sumTodayMiliSecond = 0
        var sumSignUpDateMiliSecond = 0
 
@@ -91,7 +90,7 @@ class HomeAdapter(var list:MutableList<User> , var context:Context) : RecyclerVi
            }
 
        }
-       when(pdate.shMonth.toInt()){
+       when(pdate.shMonth){
 
            7->{sumTodayMiliSecond = (pdate.shYear*12*30*24*60*60*1000)+(pdate.shMonth*30*24*60*60*1000)+(pdate.shDay*24*60*60*1000)}
            8->{sumTodayMiliSecond = (pdate.shYear*12*30*24*60*60*1000)+(pdate.shMonth*30*24*60*60*1000)+(pdate.shDay*24*60*60*1000)}
@@ -105,6 +104,6 @@ class HomeAdapter(var list:MutableList<User> , var context:Context) : RecyclerVi
 
        var result = ((((sumTodayMiliSecond - sumSignUpDateMiliSecond)/1000)/60)/60)/24
 
-       return  (reminderDate.toInt()-result).toString()
+       return  (reminderDate.toInt()-Math.abs(result)).toString()
     }
 }
