@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+            <RadioGroup
+                android:id="@+id/radio_groupe_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
+                android:paddingHorizontal="12dp"
+                android:weightSum="2"
+                android:orientation="vertical">
+                <RadioButton
+                    android:id="@+id/radio_most_bed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/primary"
+                    android:layoutDirection="rtl"
+                    android:text="بیشترین طلبکار" />
+                <RadioButton
+                    android:id="@+id/radio_most_bes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/primary"
+                    android:layoutDirection="rtl"
+                    android:text=" بیشترین بدهکار" />
+                <RadioButton
+                    android:id="@+id/radio_latest"
+                    android:layout_width="match_parent"
+                    android:buttonTint="@color/primary"
+                    android:layout_height="wrap_content"
+                    android:layoutDirection="rtl"
+                    android:text="کمترین زمان تا اتمام شهریه" />
+                <RadioButton
+                    android:id="@+id/radio_newest"
+                    android:layout_width="match_parent"
+                    android:buttonTint="@color/primary"
+                    android:layout_height="wrap_content"
+                    android:layoutDirection="rtl"
+                    android:text="بیشترین زمان تا اتمام شهریه" />
+
+            </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:paddingHorizontal="16dp"
+            android:layoutDirection="rtl"
+            android:paddingVertical="8dp"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/TV_bottomSheet_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:textColor="@color/primary"
+                android:text="تایید"/>
+            <TextView
+                android:id="@+id/TV_bottomSheet_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:layout_marginRight="36dp"
+                android:textColor="@color/red"
+                android:text="انصراف"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

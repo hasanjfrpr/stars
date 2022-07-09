@@ -7,19 +7,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.fragment.HomeFragment">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize">
-        <Toolbar
+
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_home"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="?actionBarSize"
+            android:elevation="4dp"
+            app:titleTextColor="@color/black"
             android:background="@color/primary"/>
-    </com.google.android.material.appbar.AppBarLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RV_home"
         android:layout_width="match_parent"
+        android:layoutAnimation="@anim/layout_animation"
         android:layout_height="match_parent"
         />
 

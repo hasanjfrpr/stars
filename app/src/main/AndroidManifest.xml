@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.stars">
+
+
+    <meta-data
+        android:name="android.app.default_searchable"
+        android:value="com.apkgetter.SearchResultsActivity" />
 
     <application
         android:allowBackup="true"
@@ -14,7 +20,8 @@
             android:exported="false" />
         <activity
             android:name=".view.activity.SecondActivity"
-            android:exported="false" />
+            android:exported="false"
+            tools:ignore="MissingClass" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

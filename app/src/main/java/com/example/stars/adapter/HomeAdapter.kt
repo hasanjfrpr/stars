@@ -1,13 +1,14 @@
 package com.example.stars.adapter
 
-import android.annotation.SuppressLint
-import android.app.Person
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filter.FilterResults
+import android.widget.Filterable
+import androidx.compose.ui.text.toLowerCase
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stars.R
@@ -17,10 +18,15 @@ import com.example.stars.view.activity.PersonInfoActivity
 import kotlinx.android.synthetic.main.item_home_rv.view.*
 import saman.zamani.persiandate.PersianDate
 import java.util.*
-import java.util.logging.Handler
-import kotlin.math.log
+import kotlin.collections.ArrayList
 
-class HomeAdapter(var list:MutableList<User> , var context:Context) : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>(){
+class HomeAdapter(var list:MutableList<User> , var context:Context) : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() , Filterable{
+
+    var listItem : MutableList<User> = ArrayList<User>()
+    init {
+        listItem.addAll(list)
+    }
+
 
     class HomeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
@@ -31,11 +37,23 @@ class HomeAdapter(var list:MutableList<User> , var context:Context) : RecyclerVi
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
        holder.itemView.item_home_name.text = list[position].name+" "+list[position].lastName
-        holder.itemView.item_home_bed_bes.text  = formatNumber(list[position].bedbes!!.toDouble())
+
+
         calculateReminderTime(list[position].signUpDate.toString())
 
         var cals = calculateReminderTime(list[position].signUpDate.toString()).toInt()
         holder.itemView.item_home_date_counter.text = cals.toString()
+        if (list[position].bedbes!!.toDouble() < 0){holder.itemView.textView4.text = "طلبکاری"
+            holder.itemView.item_home_bed_bes.text  = formatNumber(Math.abs(list[position].bedbes!!.toDouble()))
+            holder.itemView.item_home_bed_bes.setTextColor(ContextCompat.getColor(context , R.color.green))
+        }
+        else if (list[position].bedbes!!.toDouble() > 0){holder.itemView.textView4.text = "بدهکاری"
+            holder.itemView.item_home_bed_bes.text  = formatNumber(Math.abs(list[position].bedbes!!.toDouble()))
+            holder.itemView.item_home_bed_bes.setTextColor(ContextCompat.getColor(context , R.color.red))
+        }else{
+            holder.itemView.item_home_bed_bes.text  = formatNumber(0.0)
+            holder.itemView.item_home_bed_bes.setTextColor(ContextCompat.getColor(context , R.color.black))
+        }
         if (cals>20 && cals <= 31) holder.itemView.materialCard_item.setCardBackgroundColor(ContextCompat.getColor(context,R.color.green))
         if (cals>10 && cals <= 20) holder.itemView.materialCard_item.setCardBackgroundColor(ContextCompat.getColor(context,R.color.primary))
         if (cals>3 && cals <= 10) holder.itemView.materialCard_item.setCardBackgroundColor(ContextCompat.getColor(context,R.color.orange))
@@ -54,7 +72,7 @@ class HomeAdapter(var list:MutableList<User> , var context:Context) : RecyclerVi
     override fun getItemCount(): Int = list.size
 
 
-   private fun calculateReminderTime(date:String) :String{
+   public fun calculateReminderTime(date:String) :String{
 
        var pdate : PersianDate = PersianDate( )
        var sumTodayMiliSecond = 0
@@ -101,9 +119,48 @@ class HomeAdapter(var list:MutableList<User> , var context:Context) : RecyclerVi
            else->{sumTodayMiliSecond = (pdate.shYear*12*31*24*60*60*1000)+(pdate.shMonth*31*24*60*60*1000)+(pdate.shDay*24*60*60*1000)}
 
        }
+       var daySumToday = (((sumTodayMiliSecond/1000)/60)/60)/24
+       var daySumSignUp = (((sumSignUpDateMiliSecond/1000)/60)/60)/24
 
-       var result = ((((sumTodayMiliSecond - sumSignUpDateMiliSecond)/1000)/60)/60)/24
 
-       return  (reminderDate.toInt()-Math.abs(result)).toString()
+       var result = (daySumToday - daySumSignUp)
+
+       return  ((reminderDate.toInt()-Math.abs(result))-1).toString()
     }
+
+
+
+    override fun getFilter(): Filter {
+        return  filters
+    }
+
+    var filters : Filter  = object : Filter(){
+        override fun performFiltering(p0: CharSequence?): FilterResults {
+           var helpList : MutableList<User> = ArrayList<User>()
+
+            if(p0 == null || p0.isEmpty() || p0.length==0){
+                helpList.addAll(listItem)
+            }else{
+                for( item in list){
+                    if(item.name!!.toString().lowercase().contains(p0.toString().lowercase().trim())  || item.lastName!!.toString().lowercase().contains(p0.toString().lowercase().trim())  ){
+                        helpList.add(item)
+                    }
+                }
+            }
+            var filterResult = FilterResults()
+            filterResult.values = helpList
+
+
+            return  filterResult
+
+        }
+
+        override fun publishResults(p0: CharSequence?, p1: FilterResults?) {
+            list.clear()
+            list.addAll(p1!!.values as Collection<User>)
+            notifyDataSetChanged()
+        }
+    }
+
+
 }
