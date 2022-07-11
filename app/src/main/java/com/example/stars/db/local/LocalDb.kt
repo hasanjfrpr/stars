@@ -14,6 +14,8 @@ class User(
     var name: String?, var lastName: String?, var phoneNumber: String?,
     var signUpDate: String?, var periodPrice: String? , var buy:String?,
     var bedbes:String?,
+    var renew:String?,
+    var renewCount:String?,
     var note : String?
 ) : Parcelable {
 
@@ -59,7 +61,7 @@ interface AppDao {
 
 }
 
-@Database(entities = [User::class, SettingModel::class], version = 5, exportSchema = false)
+@Database(entities = [User::class, SettingModel::class], version = 6, exportSchema = false)
 abstract class AppDataBase : RoomDatabase() {
 
     abstract fun getDao(): AppDao

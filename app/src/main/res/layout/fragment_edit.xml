@@ -104,10 +104,110 @@
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </FrameLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginHorizontal="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:layout_marginStart="16dp"
+                    android:gravity="center"
+                    android:text="تاریخ تمدید"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/mbtn_renew_edit"
+                    style="?materialButtonOutlinedStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left"
+                    android:layout_marginEnd="16dp"
+                    android:gravity="center"
+                    android:text="1401/1/1"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </FrameLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:paddingHorizontal="16dp"
+                android:layout_height="56dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/mbtn_signUp_selectBuy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="?materialButtonOutlinedStyle"
+                    android:text="خریدها"
+                    android:textSize="18sp"
+                    android:textColor="@color/primary"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/TV_signUp_totalBuy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="@color/primary"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
             <View
                 android:layout_width="match_parent"
                 android:background="@color/grey"
                 android:layout_height="1dp"/>
+            <TextView
+                android:id="@+id/TV_tasvie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="12dp"
+                tools:text="269035653"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="16sp"/>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:paddingHorizontal="16dp"
+                android:layout_height="56dp">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:gravity="center"
+                    android:text=" تسویه حساب "
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/ET_totalPayment_edite"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:textAlignment="center"
+                    android:hint="پرداختی"
+                    android:backgroundTint="@color/primary"
+                    android:textCursorDrawable="@drawable/curson_color"
+                    android:inputType="numberDecimal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/textView2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
             <EditText
                 android:id="@+id/ET_note"
                 android:hint="یادداشت..."
@@ -138,7 +238,7 @@
 
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/mbtn_save_register"
+                android:id="@+id/mbtn_save_edit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"

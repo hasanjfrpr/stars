@@ -150,7 +150,10 @@ class SignUpFragment() : BaseFragment(), BuyDialog.onOkClicke {
                             price,
                             totalBuy,
                             totalBedBes.toString().trim(),
-                            note
+                            mbtn_date.text.toString().trim(),
+                            "0",
+                            note,
+
                         )
                     )
                 }
@@ -170,6 +173,8 @@ class SignUpFragment() : BaseFragment(), BuyDialog.onOkClicke {
                             price,
                             totalBuy,
                             totalBedBes.toString().trim(),
+                            mbtn_date.text.toString().trim(),
+                            "0",
                             note
                         )
                     )
