@@ -29,8 +29,16 @@ class User(
 @Dao
 interface AppDao {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertUser(user: User)
+
+
+
+
+    @Query("update User set name =:name , lastName=:lastName , phoneNumber=:phoneNumber , signUpDate=:signUpDate , periodPrice=:periodPrice , buy=:buy , bedbes=:bedbes,renew=:renew , renewCount=:renewCount , note=:note , id=:id  where id=:id ")
+    fun updateUser(name:String?, lastName: String? , phoneNumber: String? , signUpDate: String? ,periodPrice: String? , buy: String? ,
+    bedbes: String? , renew: String? , renewCount: String? , note: String? ,id:Int?)
+
 
     @Delete
     fun deleteUser(user: User)

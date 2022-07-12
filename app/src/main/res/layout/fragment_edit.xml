@@ -131,13 +131,23 @@
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </FrameLayout>
+            <TextView
+                android:id="@+id/TV_tasvie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="12dp"
+                tools:text="269035653"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="16sp"/>
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:paddingHorizontal="16dp"
                 android:layout_height="56dp">
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/mbtn_signUp_selectBuy"
+                    android:id="@+id/mbtn_edit_selectBuy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="?materialButtonOutlinedStyle"
@@ -150,7 +160,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/TV_signUp_totalBuy"
+                    android:id="@+id/TV_edit_totalBuy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
@@ -165,16 +175,7 @@
                 android:layout_width="match_parent"
                 android:background="@color/grey"
                 android:layout_height="1dp"/>
-            <TextView
-                android:id="@+id/TV_tasvie"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingVertical="12dp"
-                tools:text="269035653"
-                android:textColor="@color/black"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:textSize="16sp"/>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:paddingHorizontal="16dp"
@@ -216,14 +217,14 @@
                 android:backgroundTint="@color/primary"
                 android:lines="4"
                 android:gravity="top|right"
-                android:maxLines="5"
+                android:maxLines="3"
                 android:typeface="sans"
                 android:paddingVertical="18dp"
                 android:paddingHorizontal="16dp"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginVertical="4dp"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="100dp"
                 android:minLines="1"
                 android:inputType="textMultiLine"/>
 
