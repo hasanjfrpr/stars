@@ -109,6 +109,11 @@ class EditFragment(var user:User) : BaseFragment() , BuyDialog.onOkClicke {
             }
 
         })
+
+        back_edit.setOnClickListener {
+            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.Frame_personInfo , PersonInfoFragment(user)).commit()
+        }
+
         mbtn_renew_edit.setOnClickListener {
             var picker = PersianDatePickerDialog(requireContext())
                 .setPositiveButtonString("باشه")
@@ -174,6 +179,9 @@ class EditFragment(var user:User) : BaseFragment() , BuyDialog.onOkClicke {
            AppDataBase.getInstance(requireContext()).getDao().updateUser(TIET_name_edit.text.toString().trim(),TIET_family_edit.text.toString().trim(),
            TIET_phone_number_edit.text.toString().trim() , mbtn_date_edit.text.toString().trim(),user.periodPrice , user.buy,finalBed,
                mbtn_renew_edit.text.toString().trim() , (user.renewCount!!.toInt()+1).toString() ,ET_note.text.toString().trim() , user.id.toInt())
+            var singleUser = AppDataBase.getInstance(requireContext()).getDao().getUser(user.id.toString())
+            Log.i("useruser", "onCreate: "+ singleUser.id)
+            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.Frame_personInfo , PersonInfoFragment(singleUser)).commit()
 
         }
 

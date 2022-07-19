@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import com.example.stars.MainActivity
 import com.example.stars.R
 import com.example.stars.base.BaseFragment
 import com.example.stars.base.formatNumber
@@ -51,7 +52,15 @@ class PersonInfoFragment(var user:User) : BaseFragment() {
         TV_last_renew_count_userInfo.text = user.renewCount
 
 
+
         ///event
+
+        back_personInfo.setOnClickListener {
+            var intent = Intent(requireActivity() , MainActivity::class.java)
+           startActivity(intent)
+
+        }
+
         TV_phoneNumber_userInfo.setOnClickListener {
             var intent = Intent(Intent.ACTION_DIAL)
             intent.data = Uri.parse("tel:${user.phoneNumber}")
@@ -61,9 +70,7 @@ class PersonInfoFragment(var user:User) : BaseFragment() {
         btn_edit_userInfo.setOnClickListener{
             requireActivity().supportFragmentManager
                 .beginTransaction()
-                .hide(this)
-                .addToBackStack("editFragment")
-                .add(R.id.Frame_personInfo , EditFragment(user),"editFragment")
+                .replace(R.id.Frame_personInfo , EditFragment(user),"editFragment")
                 .commit()
         }
     }

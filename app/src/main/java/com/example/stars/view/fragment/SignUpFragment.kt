@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.CompoundButton
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.stars.R
 import com.example.stars.base.BaseFragment
@@ -139,7 +140,6 @@ class SignUpFragment() : BaseFragment(), BuyDialog.onOkClicke {
                 price = ET_periodPrice.text.toString().trim()
                 if (TIET_name.text.isNullOrEmpty()) TIET_name.error = "نام وارد شود"
                 if (TIET_family.text.isNullOrEmpty()) TIET_family.error = "نام خانوادگی وارد شود"
-                if(!TIET_phone_number.text!!.matches(Regex("(0|\\+98)?([ ]|,|-|[()]){0,2}9[1|2|3|4]([ ]|,|-|[()]){0,2}(?:[0-9]([ ]|,|-|[()]){0,2}){8}"))) TIET_phone_number.error="شماره تلفن به درستی وارد نشده است"
                 else {
                     AppDataBase.getInstance(requireContext()).getDao().insertUser(
                         User(
@@ -156,13 +156,12 @@ class SignUpFragment() : BaseFragment(), BuyDialog.onOkClicke {
 
                         )
                     )
+                    requireActivity().supportFragmentManager.beginTransaction().replace(R.id.frame_main , SignUpFragment()).commit()
                 }
             } else {
                 price = AppDataBase.getInstance(requireContext()).getDao().getPeroidPrice()
                 if (TIET_name.text.isNullOrEmpty()) TIET_name.error = "نام وارد شود"
                 if (TIET_family.text.isNullOrEmpty()) TIET_family.error = "نام خانوادگی وارد شود"
-                if(!TIET_phone_number.text!!.matches(Regex("(0|\\+98)?([ ]|,|-|[()]){0,2}9[1|2|3|4]([ ]|,|-|[()]){0,2}(?:[0-9]([ ]|,|-|[()]){0,2}){8}"))) TIET_phone_number.error="شماره تلفن به درستی وارد نشده است"
-
                 else {
                     AppDataBase.getInstance(requireContext()).getDao().insertUser(
                         User(
@@ -178,8 +177,12 @@ class SignUpFragment() : BaseFragment(), BuyDialog.onOkClicke {
                             note
                         )
                     )
+                    Toast.makeText(requireContext(), "کاربر ذخیره شد", Toast.LENGTH_SHORT).show()
+                    requireActivity().supportFragmentManager.beginTransaction().replace(R.id.frame_main , SignUpFragment()).commit()
                 }
             }
+
+
 
 
         }

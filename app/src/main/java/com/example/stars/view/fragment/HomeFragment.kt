@@ -59,8 +59,17 @@ class HomeFragment : BaseFragment() {
         (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
     }
     private fun setupRecycler(){
-         AppDataBase.getInstance(requireContext()).getDao().getAllUser().observe(this.viewLifecycleOwner){
 
+
+         AppDataBase.getInstance(requireContext()).getDao().getAllUser().observe(this.viewLifecycleOwner){
+             if(it.isEmpty()){
+                 empty_layout.visibility = View.VISIBLE
+                 RV_home.visibility = View.GONE
+             }else {
+                 empty_layout.visibility = View.GONE
+                 RV_home.visibility = View.VISIBLE
+             }
+             userList.clear()
              userList.addAll(it)
              adapter = HomeAdapter(userList , requireContext())
              RV_home.adapter = adapter

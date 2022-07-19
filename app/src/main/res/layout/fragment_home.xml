@@ -22,7 +22,33 @@
         android:layout_width="match_parent"
         android:layoutAnimation="@anim/layout_animation"
         android:layout_height="match_parent"
+        android:visibility="gone"
         />
+
+    <LinearLayout
+        android:id="@+id/empty_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:gravity="center"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@mipmap/folder"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="12dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            android:text="لیست ثبت نام خالی است."
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
 
 
 

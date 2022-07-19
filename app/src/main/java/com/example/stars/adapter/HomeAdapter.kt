@@ -1,7 +1,11 @@
 package com.example.stars.adapter
 
+import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +17,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stars.R
 import com.example.stars.base.formatNumber
+import com.example.stars.db.local.AppDataBase
 import com.example.stars.db.local.User
 import com.example.stars.view.activity.PersonInfoActivity
 import kotlinx.android.synthetic.main.item_home_rv.view.*
@@ -35,13 +40,33 @@ class HomeAdapter(var list:MutableList<User> , var context:Context) : RecyclerVi
         return HomeViewHolder(view)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
        holder.itemView.item_home_name.text = list[position].name+" "+list[position].lastName
 
+        holder.itemView.setOnLongClickListener {
 
-        calculateReminderTime(list[position].signUpDate.toString())
+            var alertDialog = AlertDialog.Builder(context)
+            alertDialog.setMessage(R.string.deleteMessage)
+            alertDialog.setPositiveButton(R.string.positiveButton,{p,s ->
+                AppDataBase.getInstance(context).getDao().deleteUser(list[position])
+                list.removeAt(position)
+                notifyItemRemoved(position)
+            })
+            alertDialog.setNegativeButton(R.string.negetiveButton,{s,p->
+                alertDialog.create().dismiss()
+            })
+            alertDialog.create().show()
 
-        var cals = calculateReminderTime(list[position].signUpDate.toString()).toInt()
+
+           // notifyDataSetChanged()
+            return@setOnLongClickListener true
+        }
+
+
+       // calculateReminderTime(list[position].renew.toString())
+
+        var cals = calculateReminderTime(list[position].renew.toString()).toInt()
         holder.itemView.item_home_date_counter.text = cals.toString()
         if (list[position].bedbes!!.toDouble() < 0){holder.itemView.textView4.text = "طلبکاری"
             holder.itemView.item_home_bed_bes.text  = formatNumber(Math.abs(list[position].bedbes!!.toDouble()))
@@ -64,6 +89,7 @@ class HomeAdapter(var list:MutableList<User> , var context:Context) : RecyclerVi
         holder.itemView.setOnClickListener {
             var intent  = Intent(context , PersonInfoActivity::class.java)
             intent.putExtra("userInfo" ,list[position])
+            Log.i("useruser", "onCreate: "+ list[position].id)
             context.startActivity(intent)
         }
 

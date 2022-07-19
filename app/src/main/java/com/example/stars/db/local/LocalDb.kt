@@ -16,11 +16,12 @@ class User(
     var bedbes:String?,
     var renew:String?,
     var renewCount:String?,
-    var note : String?
-) : Parcelable {
-
+    var note : String?,
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
+) : Parcelable {
+
+
 
 
 }
@@ -39,6 +40,8 @@ interface AppDao {
     fun updateUser(name:String?, lastName: String? , phoneNumber: String? , signUpDate: String? ,periodPrice: String? , buy: String? ,
     bedbes: String? , renew: String? , renewCount: String? , note: String? ,id:Int?)
 
+    @Query("select * from User where id=:id")
+    fun getUser(id:String) : User
 
     @Delete
     fun deleteUser(user: User)
@@ -69,7 +72,7 @@ interface AppDao {
 
 }
 
-@Database(entities = [User::class, SettingModel::class], version = 6, exportSchema = false)
+@Database(entities = [User::class, SettingModel::class], version = 7, exportSchema = false)
 abstract class AppDataBase : RoomDatabase() {
 
     abstract fun getDao(): AppDao

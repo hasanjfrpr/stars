@@ -6,6 +6,24 @@
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.fragment.PersonInfoFragment">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/primary">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/on_primary"
+            android:textSize="18sp"
+            android:text="اطلاعات کاربر"/>
+        <ImageView
+            android:id="@+id/back_personInfo"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:scaleType="center"
+            android:src="@drawable/ic_baseline_arrow_back_24"/>
+    </FrameLayout>
     <TextView
     android:id="@+id/TV_name_userInfo"
     android:layout_width="wrap_content"
@@ -78,13 +96,15 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="right|center"
                         android:gravity="right"
-                        tools:text="1400/12/12"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="@+id/textView8"
                         app:layout_constraintEnd_toStartOf="@+id/textView8"
+                        app:layout_constraintHorizontal_bias="0.588"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/textView8" />
+                        app:layout_constraintTop_toTopOf="@+id/textView8"
+                        app:layout_constraintVertical_bias="0.333"
+                        tools:text="1400/12/12" />
 
                     <TextView
                         android:id="@+id/textView8"
@@ -111,13 +131,15 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="right|center"
                         android:gravity="right"
-                        tools:text="1400/12/12"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="@+id/textView9"
                         app:layout_constraintEnd_toStartOf="@+id/textView9"
+                        app:layout_constraintHorizontal_bias="0.583"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/textView9" />
+                        app:layout_constraintTop_toTopOf="@+id/textView9"
+                        app:layout_constraintVertical_bias="0.333"
+                        tools:text="1400/12/12" />
 
                     <TextView
                         android:id="@+id/textView9"
@@ -125,7 +147,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="right"
-                        android:text="تعداد تمدید تا الان:"
+                        android:text="تعداد ویرایش تا الان:"
                         android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -144,13 +166,15 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="right|center"
                         android:gravity="right"
-                        tools:text="56025500"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="@+id/textView6"
                         app:layout_constraintEnd_toStartOf="@+id/textView6"
+                        app:layout_constraintHorizontal_bias="0.586"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/textView6" />
+                        app:layout_constraintTop_toTopOf="@+id/textView6"
+                        app:layout_constraintVertical_bias="0.0"
+                        tools:text="56025500" />
 
                     <TextView
                         android:id="@+id/textView6"
@@ -177,14 +201,16 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="right|center"
                         android:gravity="right"
-                        tools:text="09396484545"
                         android:textColor="@color/primary_light"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="@+id/textView7"
                         app:layout_constraintEnd_toStartOf="@+id/textView7"
+                        app:layout_constraintHorizontal_bias="0.511"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/textView7" />
+                        app:layout_constraintTop_toTopOf="@+id/textView7"
+                        app:layout_constraintVertical_bias="0.0"
+                        tools:text="09396484545" />
 
                     <TextView
                         android:id="@+id/textView7"
@@ -242,6 +268,7 @@
         android:backgroundTint="@color/primary"
         android:gravity="top|right"
         android:hint="یادداشت..."
+        android:textColorHint="@color/black"
         android:lines="4"
         android:maxLines="5"
         android:minLines="1"
