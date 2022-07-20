@@ -48,7 +48,8 @@ lateinit var onon:onOkClicke
         rv.layoutManager= LinearLayoutManager(requireContext(),RecyclerView.VERTICAL ,false)
         builder.setView(view)
         ok.setOnClickListener {
-            onon.onClick(adapter.getListBuy())
+            onon.onClick(adapter.getListBuy() , adapter.getListBuys())
+
             dismiss()
         }
 
@@ -58,6 +59,7 @@ lateinit var onon:onOkClicke
     }
 
     interface  onOkClicke{
-        fun onClick(list:MutableList<SettingModel>)
+        fun onClick(list:MutableList<SettingModel> , counts:MutableList<Int>)
+
     }
 }

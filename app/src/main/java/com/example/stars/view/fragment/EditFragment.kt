@@ -3,6 +3,7 @@ package com.example.stars.view.fragment
 import android.app.AlertDialog
 import android.graphics.Color
 import android.os.Bundle
+import android.text.BoringLayout
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -10,10 +11,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CompoundButton
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import com.example.stars.R
 import com.example.stars.base.BaseFragment
 import com.example.stars.base.formatNumber
@@ -38,6 +41,9 @@ class EditFragment(var user:User) : BaseFragment() , BuyDialog.onOkClicke {
     var totalBuy: String? = "0"
     var sumAllBedBes:Double? = 0.0
     var finalBed:String = ""
+    var isCheck : Boolean = true;
+    var periodPrice : Double = 0.0
+    var periodPrice_manual : Double? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -82,7 +88,9 @@ class EditFragment(var user:User) : BaseFragment() , BuyDialog.onOkClicke {
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                if(!p0!!.isNullOrEmpty()){
+               if(p0.isNullOrEmpty() || p0.isNullOrEmpty()){
+                   p0?.append("0")
+               }
 
                 try {
                     if (sumAllBedBes!! < 0 ){
@@ -105,6 +113,77 @@ class EditFragment(var user:User) : BaseFragment() , BuyDialog.onOkClicke {
 
                 }catch (e:Exception){}
 
+
+            }
+
+        })
+
+        checkbox_periodPrice_edit.setOnCheckedChangeListener(object :CompoundButton.OnCheckedChangeListener{
+            override fun onCheckedChanged(p0: CompoundButton?, p1: Boolean) {
+
+                if(p1){
+                    ET_periodPrice_edit.visibility = View.INVISIBLE
+                    isCheck = true
+                    sumAllBedBes = sumAllBedBes!!.toDouble()+periodPrice
+                    if (sumAllBedBes!! < 0){
+                        TV_tasvie.text = formatNumber(Math.abs(sumAllBedBes!!.toDouble()))+" تومان طلبکار"
+                        finalBed = sumAllBedBes!!.toString()
+                        TV_tasvie.setTextColor(ContextCompat.getColor(requireContext() ,R.color.green))
+                    }else{
+                        TV_tasvie.text = formatNumber(Math.abs(sumAllBedBes!!.toDouble()))+" تومان بدهکار"
+                        finalBed = sumAllBedBes!!.toString()
+                        TV_tasvie.setTextColor(ContextCompat.getColor(requireContext() ,R.color.red))
+                    }
+                }else{
+                    ET_periodPrice_edit.visibility = View.VISIBLE
+                    isCheck = false
+                    sumAllBedBes = sumAllBedBes!!.toDouble()-periodPrice
+                    if (sumAllBedBes!! < 0){
+                        TV_tasvie.text = formatNumber(Math.abs(sumAllBedBes!!.toDouble()))+" تومان طلبکار"
+                        finalBed = sumAllBedBes!!.toString()
+                        TV_tasvie.setTextColor(ContextCompat.getColor(requireContext() ,R.color.green))
+                    }else{
+                        TV_tasvie.text = formatNumber(Math.abs(sumAllBedBes!!.toDouble()))+" تومان بدهکار"
+                        finalBed = sumAllBedBes!!.toString()
+                        TV_tasvie.setTextColor(ContextCompat.getColor(requireContext() ,R.color.red))
+                    }
+//                        ET_periodPrice_edit.addTextChangedListener(object : TextWatcher{
+//                            override fun beforeTextChanged(
+//                                p0: CharSequence?,
+//                                p1: Int,
+//                                p2: Int,
+//                                p3: Int
+//                            ) {
+//
+//                            }
+//
+//                            override fun onTextChanged(
+//                                p0: CharSequence?,
+//                                p1: Int,
+//                                p2: Int,
+//                                p3: Int
+//                            ) {
+//
+//                            }
+//
+//                            override fun afterTextChanged(p0: Editable?) {
+//                                if(p0.isNullOrEmpty() || p0.isNullOrBlank()){
+//                                    p0?.append("0")
+//                                }
+//                                periodPrice_manual = p0.toString().toDouble()
+//                                sumAllBedBes = p0.toString().toDouble()+sumAllBedBes!!.toDouble()
+//                                if (sumAllBedBes!! < 0){
+//                                    TV_tasvie.text = formatNumber(Math.abs(sumAllBedBes!!.toDouble()))+" تومان طلبکار"
+//                                    finalBed = sumAllBedBes!!.toString()
+//                                    TV_tasvie.setTextColor(ContextCompat.getColor(requireContext() ,R.color.green))
+//                                }else{
+//                                    TV_tasvie.text = formatNumber(Math.abs(sumAllBedBes!!.toDouble()))+" تومان بدهکار"
+//                                    finalBed = sumAllBedBes!!.toString()
+//                                    TV_tasvie.setTextColor(ContextCompat.getColor(requireContext() ,R.color.red))
+//                                }
+//
+//                          }
+                //                       })
                 }
             }
 
@@ -127,6 +206,21 @@ class EditFragment(var user:User) : BaseFragment() , BuyDialog.onOkClicke {
                     override fun onDateSelected(persianCalendar: PersianCalendar) {
                         mbtn_renew_edit.text =
                             persianCalendar.persianYear.toString() + "/" + persianCalendar.persianMonth + "/" + persianCalendar.persianDay
+                        ssll.visibility = View.VISIBLE
+                        periodPrice = AppDataBase.getInstance(requireContext()).getDao().getPeroidPrice().toDouble()
+
+                        if(isCheck  && ssll.isVisible){
+                            sumAllBedBes = periodPrice+sumAllBedBes!!.toDouble()
+                            if (sumAllBedBes!! < 0){
+                                TV_tasvie.text = formatNumber(Math.abs(sumAllBedBes!!.toDouble()))+" تومان طلبکار"
+                                finalBed = sumAllBedBes!!.toString()
+                                TV_tasvie.setTextColor(ContextCompat.getColor(requireContext() ,R.color.green))
+                            }else{
+                                TV_tasvie.text = formatNumber(Math.abs(sumAllBedBes!!.toDouble()))+" تومان بدهکار"
+                                finalBed = sumAllBedBes!!.toString()
+                                TV_tasvie.setTextColor(ContextCompat.getColor(requireContext() ,R.color.red))
+                            }
+                        }
                     }
 
                     override fun onDismissed() {}
@@ -134,6 +228,8 @@ class EditFragment(var user:User) : BaseFragment() , BuyDialog.onOkClicke {
 
             picker.show()
         }
+
+
         mbtn_date_edit.setOnClickListener {
             var picker = PersianDatePickerDialog(requireContext())
                 .setPositiveButtonString("باشه")
@@ -154,6 +250,10 @@ class EditFragment(var user:User) : BaseFragment() , BuyDialog.onOkClicke {
 
             picker.show()
         }
+
+
+
+
         mbtn_edit_selectBuy.setOnClickListener {
             var list: MutableList<com.example.stars.models.setting.SettingModel.SettingModel> =
                 AppDataBase.getInstance(requireContext()).getDao()
@@ -189,10 +289,10 @@ class EditFragment(var user:User) : BaseFragment() , BuyDialog.onOkClicke {
 
     }
 
-    override fun onClick(list: MutableList<SettingModel>) {
+    override fun onClick(list: MutableList<SettingModel> , count : MutableList<Int>) {
         var sum: Int = 0
         for (i in 0 until list.size) {
-            sum += list[i].price!!.toInt()
+            sum += list[i].price!!.toInt()*count[i]
         }
         totalBuy = sum.toString()
         TV_edit_totalBuy.text = formatNumber(totalBuy!!.toDouble()) + " " + "تومان"
@@ -200,6 +300,7 @@ class EditFragment(var user:User) : BaseFragment() , BuyDialog.onOkClicke {
 
         if (sumAllBedBes!!.toDouble() < 0 ){
             sumAllBedBes = (sumAllBedBes!!.toDouble() + totalBuy.toString().toDouble())
+
 
         }else{
             sumAllBedBes = (sumAllBedBes!!.toDouble() + totalBuy.toString().toDouble())

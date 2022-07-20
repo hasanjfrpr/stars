@@ -3,7 +3,44 @@
     android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:gravity="right"
+    android:orientation="horizontal"
     android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/item_linear"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="16dp"
+        android:visibility="invisible"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/IV_minus"
+            android:layout_width="24dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+
+            android:layout_marginHorizontal="8dp"
+            android:src="@drawable/minus"/>
+        <TextView
+            android:id="@+id/TV_count_buy"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:layout_marginHorizontal="8dp"
+            android:text="1"/>
+        <ImageView
+            android:id="@+id/IV_add"
+            android:layout_width="24dp"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="8dp"
+            android:layout_gravity="center"
+            android:src="@drawable/add"/>
+
+
+
+    </LinearLayout>
     <CheckBox
         android:id="@+id/checkbox_item_buy"
         android:layout_width="match_parent"
@@ -14,5 +51,6 @@
         android:textColor="@color/black"
         android:buttonTint="@color/primary"
         tools:text="سیبسیبشز"/>
+
 
 </LinearLayout>

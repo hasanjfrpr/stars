@@ -6,8 +6,6 @@ import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,7 +25,6 @@ import ir.hamsaa.persiandatepicker.Listener
 import ir.hamsaa.persiandatepicker.PersianDatePickerDialog
 import ir.hamsaa.persiandatepicker.util.PersianCalendar
 import kotlinx.android.synthetic.main.fragment_sign_up.*
-import org.w3c.dom.Text
 import java.lang.Exception
 import kotlin.math.roundToInt
 
@@ -240,15 +237,17 @@ class SignUpFragment() : BaseFragment(), BuyDialog.onOkClicke {
         })
     }
 
-    override fun onClick(list: MutableList<SettingModel>) {
+    override fun onClick(list: MutableList<SettingModel> , count:MutableList<Int>) {
         var sum: Int = 0
         for (i in 0 until list.size) {
-            sum += list[i].price!!.toInt()
+            sum += list[i].price!!.toInt()*count[i]
         }
         totalBuy = sum.toString()
         TV_signUp_totalBuy.text = formatNumber(totalBuy!!.toDouble()) + " " + "تومان"
 
 
     }
+
+
 
 }

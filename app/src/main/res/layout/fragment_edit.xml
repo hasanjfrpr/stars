@@ -8,6 +8,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:fillViewport="true"
+    android:animateLayoutChanges="true"
     android:layout_height="match_parent">
     <FrameLayout
         android:layout_width="match_parent"
@@ -138,16 +139,41 @@
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </FrameLayout>
-            <TextView
-                android:id="@+id/TV_tasvie"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ssll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingVertical="12dp"
-                tools:text="269035653"
-                android:textColor="@color/black"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:textSize="16sp"/>
+                android:padding="16dp"
+                android:visibility="gone"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/ET_periodPrice_edit"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/primary"
+                    android:hint="مبلغ شهریه..."
+                    android:inputType="numberDecimal"
+                    android:textCursorDrawable="@drawable/curson_color"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="@+id/checkbox_periodPrice_edit"
+                    app:layout_constraintEnd_toStartOf="@+id/checkbox_periodPrice_edit"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/checkbox_periodPrice_edit" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_periodPrice_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/primary"
+                    android:checked="true"
+                    android:text="پرداخت کامل شهریه"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingConstraints" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:paddingHorizontal="16dp"
@@ -185,37 +211,38 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:paddingHorizontal="16dp"
-                android:layout_height="56dp">
+                android:layout_height="56dp"
+                android:paddingHorizontal="16dp">
+
 
                 <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/TV_tasvie"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_gravity="right"
                     android:gravity="center"
-                    android:text=" تسویه حساب "
+                    android:paddingVertical="12dp"
                     android:textColor="@color/black"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/ET_totalPayment_edite"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="269035653" />
+
+                <EditText
+                    android:id="@+id/ET_totalPayment_edite"
+                    android:layout_width="200dp"
+                    android:layout_height="0dp"
+                    android:backgroundTint="@color/primary"
+                    android:hint="تسویه حساب..."
+                    android:inputType="numberDecimal"
+                    android:textAlignment="center"
+                    android:textCursorDrawable="@drawable/curson_color"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <EditText
-                    android:id="@+id/ET_totalPayment_edite"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:textAlignment="center"
-                    android:hint="پرداختی"
-                    android:backgroundTint="@color/primary"
-                    android:textCursorDrawable="@drawable/curson_color"
-                    android:inputType="numberDecimal"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/textView2"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
+
             <EditText
                 android:id="@+id/ET_note"
                 android:hint="یادداشت..."

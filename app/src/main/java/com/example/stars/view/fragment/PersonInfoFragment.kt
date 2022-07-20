@@ -58,6 +58,7 @@ class PersonInfoFragment(var user:User) : BaseFragment() {
         back_personInfo.setOnClickListener {
             var intent = Intent(requireActivity() , MainActivity::class.java)
            startActivity(intent)
+            requireActivity().finish()
 
         }
 
