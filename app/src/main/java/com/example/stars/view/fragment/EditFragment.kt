@@ -31,6 +31,7 @@ import kotlinx.android.synthetic.main.fragment_edit.*
 import kotlinx.android.synthetic.main.fragment_person_info.*
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 import java.lang.Exception
+import kotlin.math.log
 
 class EditFragment(var user:User) : BaseFragment() , BuyDialog.onOkClicke {
 
@@ -39,11 +40,15 @@ class EditFragment(var user:User) : BaseFragment() , BuyDialog.onOkClicke {
     var totalbedPlus : String = "0"
     var ha : Boolean? = null
     var totalBuy: String? = "0"
-    var sumAllBedBes:Double? = 0.0
+    var sumAllBedBes:String? = "0.0"
     var finalBed:String = ""
     var isCheck : Boolean = true;
     var periodPrice : Double = 0.0
-    var periodPrice_manual : Double? = null
+    var periodPrice_manual : Double? = 0.0
+    var result = "null"
+    var isFirst = true;
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,7 +61,7 @@ class EditFragment(var user:User) : BaseFragment() , BuyDialog.onOkClicke {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         totalbed = user.bedbes!!
-        sumAllBedBes = totalbed.toDouble()
+        sumAllBedBes = totalbed
         TIET_name_edit.append(user.name)
         TIET_family_edit.append(user.lastName)
         TIET_phone_number_edit.append(user.phoneNumber)
@@ -93,11 +98,11 @@ class EditFragment(var user:User) : BaseFragment() , BuyDialog.onOkClicke {
                }
 
                 try {
-                    if (sumAllBedBes!! < 0 ){
-                        totalbedPlus = (sumAllBedBes!!  + p0.toString().toDouble()).toString()
+                    if (sumAllBedBes!!.toDouble() < 0 ){
+                        totalbedPlus = (sumAllBedBes!!  + p0.toString().toDouble())
 
                     }else{
-                        totalbedPlus = (sumAllBedBes!!  - p0.toString().toDouble()).toString()
+                        totalbedPlus = (sumAllBedBes!!.toDouble() - p0.toString().toDouble()).toString()
 
                     }
 
@@ -124,8 +129,15 @@ class EditFragment(var user:User) : BaseFragment() , BuyDialog.onOkClicke {
                 if(p1){
                     ET_periodPrice_edit.visibility = View.INVISIBLE
                     isCheck = true
-                    sumAllBedBes = sumAllBedBes!!.toDouble()+periodPrice
-                    if (sumAllBedBes!! < 0){
+                    if(result != "null"){
+                        sumAllBedBes = (sumAllBedBes!!.toDouble() - result.toDouble()).toString()
+                        result = "null"
+                    }
+                    sumAllBedBes = (sumAllBedBes!!.toDouble()+periodPrice).toString()
+
+
+
+                    if (sumAllBedBes!!.toDouble() < 0){
                         TV_tasvie.text = formatNumber(Math.abs(sumAllBedBes!!.toDouble()))+" تومان طلبکار"
                         finalBed = sumAllBedBes!!.toString()
                         TV_tasvie.setTextColor(ContextCompat.getColor(requireContext() ,R.color.green))
@@ -137,8 +149,8 @@ class EditFragment(var user:User) : BaseFragment() , BuyDialog.onOkClicke {
                 }else{
                     ET_periodPrice_edit.visibility = View.VISIBLE
                     isCheck = false
-                    sumAllBedBes = sumAllBedBes!!.toDouble()-periodPrice
-                    if (sumAllBedBes!! < 0){
+                    sumAllBedBes = (sumAllBedBes!!.toDouble()-periodPrice).toString()
+                    if (sumAllBedBes!!.toDouble() < 0){
                         TV_tasvie.text = formatNumber(Math.abs(sumAllBedBes!!.toDouble()))+" تومان طلبکار"
                         finalBed = sumAllBedBes!!.toString()
                         TV_tasvie.setTextColor(ContextCompat.getColor(requireContext() ,R.color.green))
@@ -189,6 +201,51 @@ class EditFragment(var user:User) : BaseFragment() , BuyDialog.onOkClicke {
 
         })
 
+
+        ET_periodPrice_edit.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+
+                result = p0.toString()
+
+                if(result.isNullOrEmpty() || result.isNullOrBlank()){
+                    result = "0"
+                }
+
+if (result.length >=1){
+                var remind = result.substring(0,result.length-1)
+    if(remind == "") remind = "0"
+    sumAllBedBes = (sumAllBedBes!!.toDouble() - remind.toDouble()).toString()
+}
+
+
+                sumAllBedBes = (sumAllBedBes!!.toDouble()+result.toDouble()).toString()
+              //  sumAllBedBes = (sumAllBedBes!!.toDouble() + result.toDouble()).toString()
+                Log.i("useruseruser", "onTextChanged: "+ result.toDouble())
+                Log.i("useruseruser", "onTextChanged: "+ sumAllBedBes!!.toDouble())
+                if (sumAllBedBes!!.toDouble() < 0){
+                    TV_tasvie.text = formatNumber(Math.abs(sumAllBedBes!!.toDouble()))+" تومان طلبکار"
+                    finalBed = sumAllBedBes!!.toString()
+                    TV_tasvie.setTextColor(ContextCompat.getColor(requireContext() ,R.color.green))
+                }else{
+                    TV_tasvie.text = formatNumber(Math.abs(sumAllBedBes!!.toDouble()))+" تومان بدهکار"
+                    finalBed = sumAllBedBes!!.toString()
+                    TV_tasvie.setTextColor(ContextCompat.getColor(requireContext() ,R.color.red))
+                }
+
+            }
+
+        })
+
+
         back_edit.setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction().replace(R.id.Frame_personInfo , PersonInfoFragment(user)).commit()
         }
@@ -209,9 +266,9 @@ class EditFragment(var user:User) : BaseFragment() , BuyDialog.onOkClicke {
                         ssll.visibility = View.VISIBLE
                         periodPrice = AppDataBase.getInstance(requireContext()).getDao().getPeroidPrice().toDouble()
 
-                        if(isCheck  && ssll.isVisible){
-                            sumAllBedBes = periodPrice+sumAllBedBes!!.toDouble()
-                            if (sumAllBedBes!! < 0){
+                        if(isCheck  && ssll.isVisible && isFirst){
+                            sumAllBedBes =( periodPrice+sumAllBedBes!!.toDouble()).toString()
+                            if (sumAllBedBes!!.toDouble() < 0){
                                 TV_tasvie.text = formatNumber(Math.abs(sumAllBedBes!!.toDouble()))+" تومان طلبکار"
                                 finalBed = sumAllBedBes!!.toString()
                                 TV_tasvie.setTextColor(ContextCompat.getColor(requireContext() ,R.color.green))
@@ -220,6 +277,7 @@ class EditFragment(var user:User) : BaseFragment() , BuyDialog.onOkClicke {
                                 finalBed = sumAllBedBes!!.toString()
                                 TV_tasvie.setTextColor(ContextCompat.getColor(requireContext() ,R.color.red))
                             }
+                            isFirst = false
                         }
                     }
 
@@ -299,15 +357,15 @@ class EditFragment(var user:User) : BaseFragment() , BuyDialog.onOkClicke {
 
 
         if (sumAllBedBes!!.toDouble() < 0 ){
-            sumAllBedBes = (sumAllBedBes!!.toDouble() + totalBuy.toString().toDouble())
+            sumAllBedBes = (sumAllBedBes!!.toDouble() + totalBuy.toString().toDouble()).toString()
 
 
         }else{
-            sumAllBedBes = (sumAllBedBes!!.toDouble() + totalBuy.toString().toDouble())
+            sumAllBedBes = (sumAllBedBes!!.toDouble() + totalBuy.toString().toDouble()).toString()
 
         }
 
-        if (sumAllBedBes!! < 0){
+        if (sumAllBedBes!!.toDouble() < 0){
             TV_tasvie.text = formatNumber(Math.abs(sumAllBedBes!!.toDouble()))+" تومان طلبکار"
             finalBed = sumAllBedBes!!.toString()
             TV_tasvie.setTextColor(ContextCompat.getColor(requireContext() ,R.color.green))
