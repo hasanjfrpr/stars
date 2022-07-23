@@ -149,6 +149,7 @@ class SignUpFragment() : BaseFragment(), BuyDialog.onOkClicke {
                 price = ET_periodPrice.text.toString().trim()
                 if (TIET_name.text.isNullOrEmpty()) TIET_name.error = "نام وارد شود"
                 if (TIET_family.text.isNullOrEmpty()) TIET_family.error = "نام خانوادگی وارد شود"
+                if (ET_totalPayment.text.isNullOrEmpty()) ET_totalPayment.error = "مبلغ دریافتی وارد شود"
                 else {
                     AppDataBase.getInstance(requireContext()).getDao().insertUser(
                         User(
@@ -172,6 +173,7 @@ class SignUpFragment() : BaseFragment(), BuyDialog.onOkClicke {
                 price = AppDataBase.getInstance(requireContext()).getDao().getPeroidPrice()
                 if (TIET_name.text.isNullOrEmpty()) TIET_name.error = "نام وارد شود"
                 if (TIET_family.text.isNullOrEmpty()) TIET_family.error = "نام خانوادگی وارد شود"
+                if (ET_totalPayment.text.isNullOrEmpty()) ET_totalPayment.error = "مبلغ دریافتی وارد شود"
                 else {
                     AppDataBase.getInstance(requireContext()).getDao().insertUser(
                         User(
@@ -196,6 +198,7 @@ class SignUpFragment() : BaseFragment(), BuyDialog.onOkClicke {
 
 
         }
+
 
         ET_totalPayment.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
