@@ -21,9 +21,9 @@ import kotlinx.android.synthetic.main.fragment_setting.*
 
 
 //
-class SettingFragment : BaseFragment() ,  AddSettingDialog.SettingDialogInterFace , SavePeriodPriceDialog.onClickOkPric {
+class SettingFragment : BaseFragment() ,  AddSettingDialog.SettingDialogInterFace , SavePeriodPriceDialog.onClickOkPric , SettingRecyclerAdapter.EventClickItem{
 
-     lateinit  var settingModelList:MutableList<SettingModel>
+       var settingModelList:MutableList<SettingModel> = ArrayList()
     // lateinit var addDialog : AddSettingDialog
    //  lateinit var priceDialog: SavePeriodPriceDialog
      lateinit var adapter : SettingRecyclerAdapter
@@ -41,18 +41,36 @@ class SettingFragment : BaseFragment() ,  AddSettingDialog.SettingDialogInterFac
         super.onViewCreated(view, savedInstanceState)
        // priceDialog = SavePeriodPriceDialog()
        // addDialog = AddSettingDialog()
-        settingModelList = ArrayList<SettingModel>()
-        settingModelList.addAll(AppDataBase.getInstance(requireContext()).getDao().getAllSettingModel())
-        adapter = SettingRecyclerAdapter(settingModelList,requireContext())
-        RV_setting.adapter=adapter
-        RV_setting.layoutManager=GridLayoutManager(requireContext(),2,RecyclerView.VERTICAL,false)
+        loading_view_setting.visibility = View.VISIBLE
+        AppDataBase.getInstance(requireContext()).getDao().getAllSettingModel().observe(viewLifecycleOwner){
+            loading_view_setting.visibility = View.GONE
 
-        for(i in 0 until settingModelList.size){
-            if (settingModelList[i].title=="شهریه"){
-                IV_add_setting.visibility = View.VISIBLE
-                TV_periodPrice.text = formatNumber(settingModelList[i].price!!.toDouble())
+            if(it.isEmpty()){
+                empty_layout_setting.visibility = View.VISIBLE
+                RV_setting.visibility = View.GONE
+                IV_add_setting.visibility = View.GONE
+                TV_periodPrice.text=""
+            }else{
+                empty_layout_setting.visibility = View.GONE
+                RV_setting.visibility = View.VISIBLE
+                settingModelList = ArrayList<SettingModel>()
+                settingModelList.addAll(it)
+                adapter = SettingRecyclerAdapter(settingModelList,requireContext())
+                adapter.eventClickItem = this
+                RV_setting.adapter=adapter
+                RV_setting.layoutManager=GridLayoutManager(requireContext(),2,RecyclerView.VERTICAL,false)
+            }
+
+            for(i in 0 until settingModelList.size){
+                if (settingModelList[i].title=="شهریه"){
+                    IV_add_setting.visibility = View.VISIBLE
+                    TV_periodPrice.text = formatNumber(settingModelList[i].price!!.toDouble())
+                }
             }
         }
+
+
+
 
         event()
 
@@ -63,7 +81,7 @@ class SettingFragment : BaseFragment() ,  AddSettingDialog.SettingDialogInterFac
 
     private fun event(){
         IV_add_setting.setOnClickListener {
-          var  addDialog = AddSettingDialog()
+          var  addDialog = AddSettingDialog("" , "")
             addDialog.settingInterFace=this
            addDialog.show(requireActivity().supportFragmentManager , "")
             addDialog.isCancelable=false
@@ -91,13 +109,13 @@ class SettingFragment : BaseFragment() ,  AddSettingDialog.SettingDialogInterFac
 
             }else{
                 AppDataBase.getInstance(requireContext()).getDao().updateItemSettingModel(title.toString() , price.toString())
-                    settingModelList.clear()
-                settingModelList = ArrayList<SettingModel>()
-                    settingModelList.addAll(AppDataBase.getInstance(requireContext()).getDao().getAllSettingModel())
-                    adapter = SettingRecyclerAdapter(settingModelList,requireContext())
-                    RV_setting.adapter=adapter
-                    RV_setting.layoutManager=GridLayoutManager(requireContext(),2,RecyclerView.VERTICAL,false)
-                    adapter.notifyDataSetChanged()
+//                    settingModelList.clear()
+//                settingModelList = ArrayList<SettingModel>()
+//                    settingModelList.addAll(AppDataBase.getInstance(requireContext()).getDao().getAllSettingModel())
+//                    adapter = SettingRecyclerAdapter(settingModelList,requireContext())
+//                    RV_setting.adapter=adapter
+//                    RV_setting.layoutManager=GridLayoutManager(requireContext(),2,RecyclerView.VERTICAL,false)
+//                    adapter.notifyDataSetChanged()
 
             }
 
@@ -125,20 +143,23 @@ class SettingFragment : BaseFragment() ,  AddSettingDialog.SettingDialogInterFac
         adapter.notifyDataSetChanged()
             }else{
                 AppDataBase.getInstance(requireContext()).getDao().updateItemSettingModel("شهریه" , price.toString())
-                settingModelList.clear()
-                TV_periodPrice.text = formatNumber(price!!.toDouble())
-                settingModelList.addAll(AppDataBase.getInstance(requireContext()).getDao().getAllSettingModel())
-                adapter = SettingRecyclerAdapter(settingModelList,requireContext())
-                RV_setting.adapter=adapter
-                RV_setting.layoutManager=GridLayoutManager(requireContext(),2,RecyclerView.VERTICAL,false)
-                adapter.notifyDataSetChanged()
+//                settingModelList.clear()
+//                TV_periodPrice.text = formatNumber(price!!.toDouble())
+//                settingModelList.addAll(AppDataBase.getInstance(requireContext()).getDao().getAllSettingModel())
+//                adapter = SettingRecyclerAdapter(settingModelList,requireContext())
+//                RV_setting.adapter=adapter
+//                RV_setting.layoutManager=GridLayoutManager(requireContext(),2,RecyclerView.VERTICAL,false)
+//                adapter.notifyDataSetChanged()
 
             }
         }
 
-
-
-
+    override fun onclickItem(title: String, price: String) {
+        var  addDialog = AddSettingDialog(title , price)
+        addDialog.settingInterFace=this
+        addDialog.show(requireActivity().supportFragmentManager , "")
+        addDialog.isCancelable=false
+    }
 
 
 }

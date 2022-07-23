@@ -39,6 +39,7 @@ class SignUpFragment() : BaseFragment(), BuyDialog.onOkClicke {
     var totalBedBes: String? = "0"
     var totalBuy: String? = "0"
     var note: String? = ""
+     var list : MutableList<SettingModel> = ArrayList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -110,17 +111,22 @@ class SignUpFragment() : BaseFragment(), BuyDialog.onOkClicke {
                 if (p1) {
                     isChecked = true
                     ET_periodPrice.visibility = View.INVISIBLE
+
+
                 } else {
                     isChecked = false
                     ET_periodPrice.visibility = View.VISIBLE
+
                 }
             }
         })
-
+        AppDataBase.getInstance(requireContext()).getDao() .getAllSettingModel().observe(viewLifecycleOwner){
+            list  = it as MutableList<SettingModel>
+        }
         mbtn_signUp_selectBuy.setOnClickListener {
-            var list: MutableList<com.example.stars.models.setting.SettingModel.SettingModel> =
-                AppDataBase.getInstance(requireContext()).getDao()
-                    .getAllSettingModel() as MutableList<SettingModel>
+//            var list: MutableList<com.example.stars.models.setting.SettingModel.SettingModel> =
+//                AppDataBase.getInstance(requireContext()).getDao()
+//                    .getAllSettingModel() as MutableList<SettingModel>
 
             list.remove(
                 SettingModel(
@@ -159,6 +165,7 @@ class SignUpFragment() : BaseFragment(), BuyDialog.onOkClicke {
 
                         )
                     )
+                    Toast.makeText(requireContext(), "کاربر ذخیره شد", Toast.LENGTH_SHORT).show()
                     requireActivity().supportFragmentManager.beginTransaction().replace(R.id.frame_main , SignUpFragment()).commit()
                 }
             } else {

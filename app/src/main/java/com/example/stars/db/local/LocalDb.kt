@@ -57,7 +57,7 @@ interface AppDao {
     fun deleteSettingPrice(title: String)
 
     @Query("select * from SettingModel ")
-    fun getAllSettingModel(): List<SettingModel>
+    fun getAllSettingModel(): LiveData<List<SettingModel>>
 
     @Query("select price from SettingModel where title ='شهریه'")
     fun getPeroidPrice(): String

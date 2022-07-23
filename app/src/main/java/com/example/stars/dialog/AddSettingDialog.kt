@@ -13,7 +13,7 @@ import com.example.stars.R
 import com.example.stars.base.formatNumber
 import com.google.android.material.textfield.TextInputEditText
 
-class AddSettingDialog : DialogFragment() {
+class AddSettingDialog(var titles: String? , var prices: String?) : DialogFragment() {
 
 lateinit var ok:TextView
 lateinit var cancel:TextView
@@ -31,7 +31,10 @@ lateinit var cancel:TextView
         title = view.findViewById(R.id.ET_setting_dialog_title)
         price = view.findViewById(R.id.ET_setting_dialog_price)
 
-
+if (titles != "" ){
+    title.append( titles)
+    price.append(prices)
+}
 
         cancel.setOnClickListener { dismiss() }
         ok.setOnClickListener {

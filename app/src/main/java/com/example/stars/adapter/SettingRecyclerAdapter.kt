@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.item_setting.view.*
 class SettingRecyclerAdapter(val settingList : MutableList<SettingModel>, private val context:Context) : RecyclerView.Adapter<SettingRecyclerAdapter.SettingAdapterViewHolder>() {
 
 
-
+lateinit var eventClickItem: EventClickItem
 
     class SettingAdapterViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView)
 
@@ -28,17 +28,23 @@ class SettingRecyclerAdapter(val settingList : MutableList<SettingModel>, privat
     @SuppressLint("NotifyDataSetChanged")
     override fun onBindViewHolder(holder: SettingAdapterViewHolder, position: Int) {
         holder.itemView.TV_item_setting_title.text = settingList[position].title
-        holder.itemView.TV_item_setting_price.text = formatNumber(settingList[position].price!!.toDouble())
+        holder.itemView.TV_item_setting_price.text = formatNumber(settingList[position].price!!.toDouble())+" تومان "
 
         holder.itemView.setOnLongClickListener {
             AppDataBase.getInstance(context).getDao().deleteSettingPrice(settingList[position].title.toString())
            settingList.removeAt(position)
-            notifyDataSetChanged()
+            notifyItemRemoved(position)
             return@setOnLongClickListener true
+        }
+        holder.itemView.setOnClickListener {
+            eventClickItem.onclickItem(settingList[position].title!! , settingList[position].price!!)
         }
     }
 
+
     override fun getItemCount(): Int = settingList.size
 
-
+interface  EventClickItem{
+    fun onclickItem(title:String , price:String)
+}
 }

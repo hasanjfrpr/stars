@@ -42,6 +42,8 @@ class EditFragment(var user: User) : BaseFragment(), BuyDialog.onOkClicke {
     var sumAllBedBes: String? = "0.0"
     var isCheck: Boolean = true;
     var periodPrice: String = "0"
+    var list : MutableList<SettingModel> = ArrayList()
+
 
 
     override fun onCreateView(
@@ -232,12 +234,12 @@ class EditFragment(var user: User) : BaseFragment(), BuyDialog.onOkClicke {
         }
 
 
-
+        AppDataBase.getInstance(requireContext()).getDao() .getAllSettingModel().observe(viewLifecycleOwner){
+            list  = it as MutableList<SettingModel>
+        }
 
         mbtn_edit_selectBuy.setOnClickListener {
-            var list: MutableList<com.example.stars.models.setting.SettingModel.SettingModel> =
-                AppDataBase.getInstance(requireContext()).getDao()
-                    .getAllSettingModel() as MutableList<SettingModel>
+
 
             list.remove(
                 SettingModel(

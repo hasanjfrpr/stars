@@ -57,7 +57,47 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
+        android:layoutAnimation="@anim/layout_animation"
         android:id="@+id/RV_setting"/>
+
+    <FrameLayout
+        android:id="@+id/loading_view_setting"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        >
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/primary"
+            android:foregroundTint="@color/primary"/>
+    </FrameLayout>
+    <LinearLayout
+        android:id="@+id/empty_layout_setting"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:gravity="center"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@mipmap/folder"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="12dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            android:text="لیست کالا خالی است."
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
 
 
 </LinearLayout>
