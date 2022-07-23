@@ -1,6 +1,7 @@
 package com.example.stars.adapter
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
@@ -25,7 +26,7 @@ import saman.zamani.persiandate.PersianDate
 import java.util.*
 import kotlin.collections.ArrayList
 
-class HomeAdapter(var list:MutableList<User> , var context:Context) : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() , Filterable{
+class HomeAdapter(var list:MutableList<User> , var context:Activity) : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() , Filterable{
 
     var listItem : MutableList<User> = ArrayList<User>()
     init {
@@ -44,7 +45,7 @@ class HomeAdapter(var list:MutableList<User> , var context:Context) : RecyclerVi
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
        holder.itemView.item_home_name.text = list[position].name+" "+list[position].lastName
 
-        holder.itemView.setOnLongClickListener {
+        holder.itemView.root_constraint_recycler_home.setOnLongClickListener {
 
             var alertDialog = AlertDialog.Builder(context)
             alertDialog.setMessage(R.string.deleteMessage)
@@ -86,11 +87,13 @@ class HomeAdapter(var list:MutableList<User> , var context:Context) : RecyclerVi
         if ( cals <= 0) holder.itemView.materialCard_item.setCardBackgroundColor(ContextCompat.getColor(context,R.color.black))
 
 
-        holder.itemView.setOnClickListener {
+        holder.itemView.root_constraint_recycler_home.setOnClickListener {
             var intent  = Intent(context , PersonInfoActivity::class.java)
             intent.putExtra("userInfo" ,list[position])
             Log.i("useruser", "onCreate: "+ list[position].id)
             context.startActivity(intent)
+            context.finish()
+
         }
 
     }

@@ -1,82 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="4dp"
-    android:id="@+id/root_constraint_recycler_home"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <TextView
-        android:id="@+id/item_home_name"
-        android:layout_width="wrap_content"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
-        android:padding="4dp"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="حسن جعفرپور" />
+        android:clickable="true"
+        android:background="?selectableItemBackground"
+        android:paddingBottom="4dp"
+        android:id="@+id/root_constraint_recycler_home"
+        xmlns:tools="http://schemas.android.com/tools" >
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:padding="4dp"
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/item_home_name"
-        app:layout_constraintTop_toBottomOf="@+id/item_home_name"
-        android:text="بدهکاربستانکار:" />
-
-    <TextView
-        android:id="@+id/item_home_bed_bes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
-        android:padding="4dp"
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        android:layout_marginRight="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView4"
-        app:layout_constraintEnd_toStartOf="@+id/textView4"
-        app:layout_constraintTop_toTopOf="@+id/textView4"
-        tools:text="5516500" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/materialCard_item"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:elevation="4dp"
-        android:layout_marginLeft="18dp"
-        app:cardCornerRadius="30dp"
-        android:layout_marginVertical="12dp"
-        app:cardBackgroundColor="@color/primary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
         <TextView
-            android:id="@+id/item_home_date_counter"
+            android:id="@+id/item_home_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="25"
-            android:textColor="@color/on_primary"
-            android:textSize="30sp"
-            android:layout_gravity="center"
-            android:textStyle="bold"/>
-    </androidx.cardview.widget.CardView>
+            android:layout_marginHorizontal="8dp"
+            android:padding="4dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="حسن جعفرپور" />
 
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:padding="4dp"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/item_home_name"
+            app:layout_constraintTop_toBottomOf="@+id/item_home_name"
+            android:text="بدهکاربستانکار:" />
+
+        <TextView
+            android:id="@+id/item_home_bed_bes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:padding="4dp"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginRight="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView4"
+            app:layout_constraintEnd_toStartOf="@+id/textView4"
+            app:layout_constraintTop_toTopOf="@+id/textView4"
+            tools:text="5516500" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/materialCard_item"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:elevation="4dp"
+            android:layout_marginLeft="18dp"
+            app:cardCornerRadius="30dp"
+            android:layout_marginVertical="12dp"
+            app:cardBackgroundColor="@color/primary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" >
+            <TextView
+                android:id="@+id/item_home_date_counter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="25"
+                android:textColor="@color/on_primary"
+                android:textSize="30sp"
+                android:layout_gravity="center"
+                android:textStyle="bold"/>
+        </androidx.cardview.widget.CardView>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <View
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/grey"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:background="@color/grey"/>
+</LinearLayout>

@@ -64,7 +64,7 @@ class HomeFragment : BaseFragment() {
 
          AppDataBase.getInstance(requireContext()).getDao().getAllUser().observe(this.viewLifecycleOwner){
              loading_view.visibility = View.GONE
-             
+
              if(it.isEmpty()){
                  empty_layout.visibility = View.VISIBLE
                  RV_home.visibility = View.GONE
@@ -74,7 +74,7 @@ class HomeFragment : BaseFragment() {
              }
              userList.clear()
              userList.addAll(it)
-             adapter = HomeAdapter(userList , requireContext())
+             adapter = HomeAdapter(userList , requireActivity())
              RV_home.adapter = adapter
              RV_home.layoutManager = LinearLayoutManager(requireContext() , RecyclerView.VERTICAL , false)
          }
@@ -123,7 +123,7 @@ class HomeFragment : BaseFragment() {
             var radioGroupe = inflate.findViewById<RadioGroup>(R.id.radio_groupe_main)
             cancel.setOnClickListener { dialog.dismiss() }
             ok.setOnClickListener {
-                adapter = HomeAdapter(userList , requireContext())
+                adapter = HomeAdapter(userList , requireActivity())
                 RV_home.adapter = adapter
                 RV_home.layoutManager = LinearLayoutManager(requireContext() , RecyclerView.VERTICAL , false)
                 adapter.notifyDataSetChanged()
