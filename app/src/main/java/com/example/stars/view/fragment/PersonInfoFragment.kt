@@ -47,7 +47,15 @@ class PersonInfoFragment(var user:User) : BaseFragment() {
         TV_phoneNumber_userInfo.text = user.phoneNumber
         TV_startDate_userInfo.text = user.signUpDate
         TV_name_userInfo.text = user.name+" "+user.lastName
-        Tv_note_edit.text = user.note
+        if(user.note.isNullOrEmpty()){
+            showEmptyNote.visibility = View.VISIBLE
+            Tv_note_edit.visibility = View.GONE
+        }else{
+            showEmptyNote.visibility = View.GONE
+            Tv_note_edit.visibility = View.VISIBLE
+            Tv_note_edit.text = user.note
+        }
+
         TV_renew_userInfo.text = user.renew
         TV_last_renew_count_userInfo.text = user.renewCount
 

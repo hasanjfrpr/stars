@@ -29,7 +29,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="right"
                     style="?materialButtonOutlinedStyle"
-                    android:text="ویرایش"
+                    android:text="ثبت ویرایش"
                     android:backgroundTint="@color/on_primary"
                     android:textColor="@color/primary"
                     android:layout_marginRight="16dp"

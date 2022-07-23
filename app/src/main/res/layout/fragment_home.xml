@@ -25,6 +25,20 @@
         android:visibility="gone"
         />
 
+    <FrameLayout
+        android:id="@+id/loading_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        >
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/primary"
+            android:foregroundTint="@color/primary"/>
+    </FrameLayout>
+
     <LinearLayout
         android:id="@+id/empty_layout"
         android:layout_width="match_parent"

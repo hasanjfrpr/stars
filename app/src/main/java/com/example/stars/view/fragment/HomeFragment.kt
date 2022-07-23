@@ -60,8 +60,11 @@ class HomeFragment : BaseFragment() {
     }
     private fun setupRecycler(){
 
+        loading_view.visibility  = View.VISIBLE
 
          AppDataBase.getInstance(requireContext()).getDao().getAllUser().observe(this.viewLifecycleOwner){
+             loading_view.visibility = View.GONE
+             
              if(it.isEmpty()){
                  empty_layout.visibility = View.VISIBLE
                  RV_home.visibility = View.GONE

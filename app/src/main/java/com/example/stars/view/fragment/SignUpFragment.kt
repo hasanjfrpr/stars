@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +26,7 @@ import ir.hamsaa.persiandatepicker.Listener
 import ir.hamsaa.persiandatepicker.PersianDatePickerDialog
 import ir.hamsaa.persiandatepicker.util.PersianCalendar
 import kotlinx.android.synthetic.main.fragment_sign_up.*
+import saman.zamani.persiandate.PersianDate
 import java.lang.Exception
 import kotlin.math.roundToInt
 
@@ -50,6 +52,10 @@ class SignUpFragment() : BaseFragment(), BuyDialog.onOkClicke {
         super.onViewCreated(view, savedInstanceState)
         setDate()
         signup()
+
+        PersianDate().apply {
+            mbtn_date.text = "${this.shYear}/${this.shMonth}/${this.shDay}"
+        }
     }
 
     private fun setDate() {

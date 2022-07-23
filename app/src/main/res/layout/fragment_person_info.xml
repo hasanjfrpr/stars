@@ -266,8 +266,9 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="4dp"
         android:backgroundTint="@color/primary"
-        android:gravity="top|right"
-        android:hint="یادداشت..."
+        android:gravity="top|center"
+        android:visibility="gone"
+        android:textAlignment="center"
         android:textColorHint="@color/black"
         android:lines="4"
         android:maxLines="5"
@@ -277,5 +278,30 @@
         android:textCursorDrawable="@drawable/curson_color"
         android:translationZ="3dp"
         android:typeface="sans" />
+    <LinearLayout
+        android:id="@+id/showEmptyNote"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:visibility="visible"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_note"
+            android:layout_gravity="center"
+            app:tint="@color/greyTar" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingHorizontal="16dp"
+            android:textAlignment="center"
+            android:text="یادداشتی برای این کاربر وجود ندارد برای ثبت یادداشت به بخش ویرایش اطلاعات مراجعه کنید."
+            android:textSize="14sp"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/greyTar"
+            android:textStyle="bold"/>
+    </LinearLayout>
 
 </LinearLayout>

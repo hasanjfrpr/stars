@@ -8,6 +8,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="grey_blue">#37474f</color>
     <color name="grey">#e0e0e0</color>
+    <color name="greyTar">#9e9e9e</color>
     <color name="red">#f44336</color>
     <color name="green">#00e676</color>
     <color name="orange">#ff8f00</color>
